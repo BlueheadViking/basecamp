@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griffin's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p>Hi, my name is</p>
+            <h1>Griffin,</h1>
+            <p>A <strong>Product Designer</strong> crafting intuitive and impactful digital experiences. With a focus on <strong>UX, mapping</strong>, and <strong>SaaS systems</strong>, I bridge technical expertise with user needs to create products that are both powerful and easy to use. This is placeholder text.</p>
+            <div class="buttons">
+                <button class="btn-primary">My Work</button>
+                <button class="btn-secondary">Resume</button>
+            </div>
+        </div>
+        <div class="section-header">
+            <h2>Experiments</h2>
+            <p>I muck around in my spare time making things. </p>
+        </div>    
+        </div>
+        <div class="projects">
+
+            <div class="project-card" data-project="dot-game">
+                <div class="image-container">Placeholder Image</div>
+                <h4>The Dot Game</h4>
+                <div class="tags">
+                    <span>Fun</span> <span>AI</span> <span>Game</span>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="geopic">
+                <div class="image-container">Placeholder Image</div>
+                <h4>Geopic</h4>
+                <div class="tags">
+                    <span>Fun</span> <span>AI</span> <span>Mapping</span>
+                </div>
+            </div>
+            
+            <div class="project-card" data-project="geo-mapping">
+                <div class="image-container">Placeholder Image</div>
+                <h4>Carto Experiment</h4>
+                <div class="tags">
+                    <span>UX</span> <span>UI</span> <span>Interaction Design</span>
+                </div>
+            </div>
+            
+            <div class="project-card" data-project="graphic-design">
+                <div class="image-container">Placeholder Image</div>
+                <h4>Graphic Design</h4>
+                <div class="tags">
+                    <span>UX</span> <span>UI</span> <span>Interaction Design</span>
+                </div>
+            </div>
+                        
+        </div>
+        </div>
+    </div>
+    <div class="footer"> Griffin 2025 </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const projectCards = document.querySelectorAll(".project-card");
+    
+                projectCards.forEach(card => {
+                    card.addEventListener("click", function () {
+                        const projectName = this.getAttribute("data-project");
+                        window.location.href = `projects/${projectName}.html`;
+                    });
+                });
+            });
+        </script>
+    </body>
+    </html>
+
+
+
+</body>
+</html>

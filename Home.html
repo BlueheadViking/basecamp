@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griffin's Portfolio</title>
+    <style>
+        @font-face {
+            font-family: 'ABCMonumentGrotesk';
+            src: url('/mnt/data/ABCMonumentGroteskSemi-Mono-Regular-Trial.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'ABCMonumentGrotesk';
+            src: url('/mnt/data/ABCMonumentGroteskSemi-Mono-Bold-Trial.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            background: #F8FEF2;
+            font-family: 'ABCMonumentGrotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #0D5239;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px 0;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 18px;
+            width: 60%;
+            margin: auto;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .buttons button {
+            background: #0D5239;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .tags {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .tags span {
+            display: inline-block;
+            background: white;
+            border: 1px solid #0D5239;
+            padding: 5px 10px;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(13, 82, 57, 0.5);
+        }
+
+        .project-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background: #0D5239;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Griffin,</h1>
+            <p>A Product Designer crafting intuitive and impactful digital experiences. With a focus on <strong>UX, mapping</strong>, and <strong>SaaS systems</strong>, I bridge technical expertise with user needs to create products that are both powerful and easy to use.</p>
+        </div>
+        <div class="buttons">
+            <button>My Work</button>
+            <button>Resume</button>
+        </div>
+        <div class="tags">
+            <span>Product Design</span>
+            <span>UX</span>
+            <span>UI</span>
+            <span>Cartography</span>
+            <span>Photography</span>
+            <span>Travel</span>
+            <span>Writing</span>
+            <span>Graphic Design</span>
+        </div>
+        <h2>Efforts</h2>
+        <p>Here is some work I have done</p>
+        <div class="projects">
+            <div class="project-card">
+                <img src="project1.jpg" alt="Project 1">
+                <div class="project-title">AirVision Tablet</div>
+                <span>UX</span>
+                <span>UI</span>
+                <span>Graphic Design</span>
+            </div>
+            <div class="project-card">
+                <img src="project2.jpg" alt="Project 2">
+                <div class="project-title">AirVision Tablet</div>
+                <span>UX</span>
+                <span>UI</span>
+                <span>Graphic Design</span>
+            </div>
+            <div class="project-card">
+                <img src="project3.jpg" alt="Project 3">
+                <div class="project-title">AirVision Tablet</div>
+                <span>UX</span>
+                <span>UI</span>
+                <span>Graphic Design</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Griffin 2025
+    </div>
+</body>
+</html>

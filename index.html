@@ -17,13 +17,13 @@
                 <button class="btn-secondary">Resume</button>
             </div>
         </div>
+
         <div class="section-header">
             <h2>Experiments</h2>
-            <p>I muck around in my spare time making things. </p>
-        </div>    
+            <p>I muck around in my spare time making things.</p>
         </div>
-        <div class="projects">
 
+        <div class="projects">
             <div class="project-card" data-project="dot-game">
                 <div class="image-container">Placeholder Image</div>
                 <h4>The Dot Game</h4>
@@ -39,7 +39,7 @@
                     <span>Fun</span> <span>AI</span> <span>Mapping</span>
                 </div>
             </div>
-            
+
             <div class="project-card" data-project="geo-mapping">
                 <div class="image-container">Placeholder Image</div>
                 <h4>Carto Experiment</h4>
@@ -47,7 +47,7 @@
                     <span>UX</span> <span>UI</span> <span>Interaction Design</span>
                 </div>
             </div>
-            
+
             <div class="project-card" data-project="graphic-design">
                 <div class="image-container">Placeholder Image</div>
                 <h4>Graphic Design</h4>
@@ -55,29 +55,41 @@
                     <span>UX</span> <span>UI</span> <span>Interaction Design</span>
                 </div>
             </div>
-                        
-        </div>
         </div>
     </div>
+
     <div class="footer"> Griffin 2025 </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const projectCards = document.querySelectorAll(".project-card");
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const projectCards = document.querySelectorAll(".project-card");
-    
-                projectCards.forEach(card => {
-                    card.addEventListener("click", function () {
-                        const projectName = this.getAttribute("data-project");
-                        window.location.href = `projects/${projectName}.html`;
-                    });
+            projectCards.forEach(card => {
+                // Click event for navigation
+                card.addEventListener("click", function () {
+                    const projectName = this.getAttribute("data-project");
+                    window.location.href = `projects/${projectName}.html`;
+                });
+
+                // 3D Hover Effect
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateY = ((x - centerX) / centerX) * 10; // Adjust rotation strength
+                    const rotateX = ((centerY - y) / centerY) * 10;
+
+                    card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
                 });
             });
-        </script>
-    </body>
-    </html>
-
-
-
+        });
+    </script>
 </body>
 </html>

@@ -34,11 +34,14 @@
 }
 
 body {
-    background: var(--background-color);
+    background: #F8FEF2 url('images/topo-map.svg') repeat;
     font-family: 'ABCMonumentGrotesk', sans-serif;
     margin: 0;
     padding: 0;
     color: var(--primary-color);
+    background-size: cover; /* Adjust as needed */
+    background-position: top center; /* Adjust as needed */
+    background-attachment: fixed; /* Keeps it fixed while scrolling */
 }
 
 .container {

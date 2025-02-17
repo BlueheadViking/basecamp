@@ -222,9 +222,31 @@ h2 {
 }
 
 .footer {
-    background: var(--footer-background);
-    text-align: center;
-    padding: 16px;
-    color: white;
-    margin-top: 30vh;
+    display: flex;
+    flex-direction: column; /* Auto Layout style - stacks elements vertically */
+    align-items: center;
+    justify-content: flex-end; /* Keeps text at the bottom */
+    width: 100%;
+    height: inherit; 
+    background: #E1EDE0; /* Background color */
+    margin: auto;
+    overflow: hidden; /* Prevents scrollbars */
 }
+
+/* The SVG rectangle shape */
+.footer-svg {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    background: #F8FEF2 url('images/topo-map-footer.svg') repeat;
+}
+
+/* Footer text styling */
+.footer-content {
+    background: #0E523A; /* Footer green color */
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 16px;
+    font-size: 18px;
+}
+

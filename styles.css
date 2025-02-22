@@ -81,6 +81,14 @@ h2 {
     margin-bottom: 16px;
 }
 
+h3 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 40px;
+    margin-bottom: 16px;
+    margin-top: 32px;
+}
+
 h4 {
     font-size: 18px;
     font-weight: 700;
@@ -148,7 +156,7 @@ p {
 }
 
 .image-wrapper {
-    padding: 16px;
+    padding: 4px;
     max-width: 800px;
     margin: auto;
 }
@@ -192,7 +200,7 @@ p {
 
 .project-card {
     background: var(--secondary-background);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(2px);
     padding: 16px;
     border-radius: 12px;
     text-align: left;
@@ -260,7 +268,7 @@ p {
     background: #0E523A; /* Footer green color */
     width: 100%;
     text-align: center;
-    color: white;
+    color: #ffffff80;
     padding: 16px;
     font-size: 18px;
 }
@@ -282,9 +290,9 @@ p {
     border: 2px solid var(--border-color);
     border-radius: 12px;
     padding: 16px;
-    margin: 16px 0;
     transition: transform 0.1s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    backdrop-filter: blur(2px);
 }
 
 .project-row:hover {

@@ -128,71 +128,76 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            //
-
+    
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
             // Smooth scrolling to "Projects & Experiments" section
             const myWorkButton = document.querySelector("#myWorkBtn");
             const projectsSection = document.querySelector("#projects");
-
+    
             if (myWorkButton && projectsSection) {
                 myWorkButton.addEventListener("click", function () {
                     projectsSection.scrollIntoView({ behavior: "smooth" });
                 });
             }
-
+    
             // Smooth scrolling to "Writing" section
             const writingButton = document.querySelector("#writingBtn");
             const writingSection = document.querySelector("#writing");
-
+    
             if (writingButton && writingSection) {
                 writingButton.addEventListener("click", function () {
                     writingSection.scrollIntoView({ behavior: "smooth" });
                 });
             }
-            
-            // 1. .project-card - click opens projects/*, with 3D hover effect
-            //
+    
+            // Click event for project cards (works on all devices)
             const projectCards = document.querySelectorAll(".project-card");
-        
+    
             projectCards.forEach(card => {
-                // Click event for navigation to the "projects" folder
                 card.addEventListener("click", function () {
                     const projectName = this.getAttribute("data-project");
                     window.location.href = `projects/${projectName}.html`;
                 });
-        
-                // 3D Hover Effect
-                card.addEventListener("mousemove", (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-        
-                    const rotateY = ((x - centerX) / centerX) * 10; // Adjust rotation strength
-                    const rotateX = ((centerY - y) / centerY) * 10;
-        
-                    card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
-                });
-        
-                card.addEventListener("mouseleave", () => {
-                    card.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
-                });
             });
-        
-            //
-            // 2. .project-row - click opens writing/*
-            //
+    
+            // Click event for project rows (writing section)
             const projectRows = document.querySelectorAll(".project-row");
-        
+    
             projectRows.forEach(row => {
                 row.addEventListener("click", function () {
                     const projectName = this.getAttribute("data-project");
                     window.location.href = `writing/${projectName}.html`;
                 });
             });
+    
+            // 3D Hover Effect only on desktop (not on mobile/tablet)
+            if (!isTouchDevice) {
+                const interactiveElements = document.querySelectorAll(".project-card, .project-row");
+    
+                interactiveElements.forEach(element => {
+                    element.addEventListener("mousemove", (e) => {
+                        const rect = element.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+    
+                        const rotateY = ((x - centerX) / centerX) * 10; // Adjust rotation strength
+                        const rotateX = ((centerY - y) / centerY) * 10;
+    
+                        element.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
+                    });
+    
+                    element.addEventListener("mouseleave", () => {
+                        element.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
+                    });
+                });
+            }
+    
         });
-        </script>
+    </script>
+    
         
 
 </body>

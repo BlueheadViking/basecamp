@@ -13,12 +13,12 @@
             <h1>Griffin,</h1>
             <p>A <strong>Product Designer</strong> crafting intuitive and impactful digital experiences. With a focus on <strong>UX, mapping</strong>, and <strong>SaaS systems</strong>, I bridge technical expertise with user needs to create products that are both powerful and easy to use. This is placeholder text.</p>
             <div class="buttons">
-                <button class="btn-primary">Experiments</button>
-                <button class="btn-secondary">Blog</button>
+                <button class="btn-primary" id="myWorkBtn">My Work</button>
+                <button class="btn-secondary" id="writingBtn">Writing</button>
             </div>
         </div>
         
-        <div class="section-header">
+        <div class="section-header" id="projects">
             <h2>Projects & Experiments</h2>
             <p>Work I have done professionally as part of a team</p>
         </div>
@@ -27,103 +27,92 @@
         <div class="projects">
 
             <div class="project-card" data-project="job-management-ux">
-                <div class="image-container">Placeholder Image</div>
+                <div class="image-container">
+                    <img src="images\job-management-card.webp" alt="Job Management UX">
+                </div>
                 <h4>Job Management UX</h4>
                 <div class="tags">
                     <span>UX</span> <span>UI</span> <span>Design Thinking</span>
                 </div>
             </div>
-
-
+            
+            <div class="project-card" data-project="boids">
+                <div class="image-container">
+                    <img src="images/fish-game-card.webp" alt="The Fish Game">
+                </div>
+                <h4>The Fish Game</h4>
+                <div class="tags">
+                    <span>UX</span> <span>UI</span> <span>Interaction Design</span>
+                </div>
+            </div>
+            
             <div class="project-card" data-project="dot-game">
-                <div class="image-container">Placeholder Image</div>
+                <div class="image-container">
+                    <img src="images/dot-game-card.webp" alt="The Dot Game">
+                </div>
                 <h4>The Dot Game</h4>
                 <div class="tags">
                     <span>Fun</span> <span>AI</span> <span>Game</span>
                 </div>
             </div>
-
+            
             <div class="project-card" data-project="geopic">
-                <div class="image-container">Placeholder Image</div>
+                <div class="image-container">
+                    <img src="images/geopic.webp" alt="Geopic">
+                </div>
                 <h4>Geopic</h4>
                 <div class="tags">
                     <span>Fun</span> <span>AI</span> <span>Mapping</span>
                 </div>
             </div>
-
+            
             <div class="project-card" data-project="geo-mapping">
-                <div class="image-container">Placeholder Image</div>
+                <div class="image-container">
+                    <img src="images/placeholder.webp" alt="Carto Experiment">
+                </div>
                 <h4>Carto Experiment</h4>
                 <div class="tags">
                     <span>UX</span> <span>UI</span> <span>Interaction Design</span>
                 </div>
             </div>
-
+            
             <div class="project-card" data-project="graphic-design">
-                <div class="image-container">Placeholder Image</div>
+                <div class="image-container">
+                    <img src="images/placeholder.webp" alt="Graphic Design">
+                </div>
                 <h4>Graphic Design</h4>
                 <div class="tags">
                     <span>UX</span> <span>UI</span> <span>Interaction Design</span>
                 </div>
             </div>
-
-            <div class="project-card" data-project="geo-mapping">
-                <div class="image-container">Placeholder Image</div>
-                <h4>Carto Experiment</h4>
-                <div class="tags">
-                    <span>UX</span> <span>UI</span> <span>Interaction Design</span>
-                </div>
-            </div>
-
-            <div class="project-card" data-project="geo-mapping">
-                <div class="image-container">Placeholder Image</div>
-                <h4>Carto Experiment</h4>
-                <div class="tags">
-                    <span>UX</span> <span>UI</span> <span>Interaction Design</span>
-                </div>
-            </div>
-
-            <div class="project-card" data-project="geo-mapping">
-                <div class="image-container">Placeholder Image</div>
-                <h4>Carto Experiment</h4>
-                <div class="tags">
-                    <span>UX</span> <span>UI</span> <span>Interaction Design</span>
-                </div>
-            </div>
-
-            <div class="project-card" data-project="boids">
-                <div class="image-container">Placeholder Image</div>
-                <h4>Boids Test</h4>
-                <div class="tags">
-                    <span>UX</span> <span>UI</span> <span>Interaction Design</span>
-                </div>
-            </div>
+            
 
             
         </div>
     </div>
 
-    <div class="section-header">
+    <div class="section-header" id="writing">
         <h2>Writing</h2>
-        <p>I rarely put pen to paper like this, but when I do, it can be found here.</p>
+        <p>I rarely put pen to paper, but when I do, it can be found here.</p>
     </div>
+    
 
 
 <div class="project-list">
  
 
-    <div class="project-row" data-project="dot-game">
+    <div class="project-row" data-project="design-process">
         
         <div class="project-row-content">
             <h4>My Design Process</h4>
-            <p>Strategies for Preparing a High-Stakes Presentation.</p>
+            <p>How I ensure my designwork is industry leading.</p>
         </div>
     </div>
 
-    <div class="project-row" data-project="dot-game">
+    <div class="project-row" data-project="presentation">
         
         <div class="project-row-content">
-            <h4>How to: Prepare a High Stakes Presentation</h4>
+            <h4>High Stakes Presenting Tips</h4>
             <p>Strategies for Preparing a High-Stakes Presentation.</p>
         </div>
     </div>
@@ -139,15 +128,39 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const projectCards = document.querySelectorAll(".project-card");
+            //
 
+            // Smooth scrolling to "Projects & Experiments" section
+            const myWorkButton = document.querySelector("#myWorkBtn");
+            const projectsSection = document.querySelector("#projects");
+
+            if (myWorkButton && projectsSection) {
+                myWorkButton.addEventListener("click", function () {
+                    projectsSection.scrollIntoView({ behavior: "smooth" });
+                });
+            }
+
+            // Smooth scrolling to "Writing" section
+            const writingButton = document.querySelector("#writingBtn");
+            const writingSection = document.querySelector("#writing");
+
+            if (writingButton && writingSection) {
+                writingButton.addEventListener("click", function () {
+                    writingSection.scrollIntoView({ behavior: "smooth" });
+                });
+            }
+            
+            // 1. .project-card - click opens projects/*, with 3D hover effect
+            //
+            const projectCards = document.querySelectorAll(".project-card");
+        
             projectCards.forEach(card => {
-                // Click event for navigation
+                // Click event for navigation to the "projects" folder
                 card.addEventListener("click", function () {
                     const projectName = this.getAttribute("data-project");
                     window.location.href = `projects/${projectName}.html`;
                 });
-
+        
                 // 3D Hover Effect
                 card.addEventListener("mousemove", (e) => {
                     const rect = card.getBoundingClientRect();
@@ -155,18 +168,32 @@
                     const y = e.clientY - rect.top;
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-
+        
                     const rotateY = ((x - centerX) / centerX) * 10; // Adjust rotation strength
                     const rotateX = ((centerY - y) / centerY) * 10;
-
+        
                     card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
                 });
-
+        
                 card.addEventListener("mouseleave", () => {
                     card.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
                 });
             });
+        
+            //
+            // 2. .project-row - click opens writing/*
+            //
+            const projectRows = document.querySelectorAll(".project-row");
+        
+            projectRows.forEach(row => {
+                row.addEventListener("click", function () {
+                    const projectName = this.getAttribute("data-project");
+                    window.location.href = `writing/${projectName}.html`;
+                });
+            });
         });
-    </script>
+        </script>
+        
+
 </body>
 </html>

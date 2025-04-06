@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sheep Herding Simulation</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(120deg, #1a1a1a, #333);
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="boidCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('boidCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initializeGrass();
+    });
+
+    const gridSize = 20;
+    let grassGrid = [];
+    
+    function initializeGrass() {
+      grassGrid = [];
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        let row = [];
+        for (let y = 0; y < canvas.height; y += gridSize) {
+          row.push({ x, y, level: 5, eatingTime: 0 });
+        }
+        grassGrid.push(row);
+      }
+    }
+    initializeGrass();
+
+    function drawGrass() {
+      for (let row of grassGrid) {
+        for (let grass of row) {
+          const opacity = grass.level / 5;
+          ctx.fillStyle = `rgba(34, 139, 34, ${opacity})`;
+          ctx.fillRect(grass.x, grass.y, gridSize, gridSize);
+        }
+      }
+    }
+
+    class Boid {
+      constructor() {
+        this.position = { x: Math.random() * canvas.width, y: Math.random() * canvas.height };
+        this.velocity = { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 };
+        this.acceleration = { x: 0, y: 0 };
+        this.maxSpeed = 1.5;
+        this.hunger = 100;
+        this.isEating = false;
+      }
+
+      applyForce(force) {
+        this.acceleration.x += force.x;
+        this.acceleration.y += force.y;
+      }
+
+      flock(boids) {
+        let perceptionRadius = 50;
+        let alignment = { x: 0, y: 0 };
+        let cohesion = { x: 0, y: 0 };
+        let separation = { x: 0, y: 0 };
+        let total = 0;
+
+        for (let other of boids) {
+          let dx = other.position.x - this.position.x;
+          let dy = other.position.y - this.position.y;
+          let distance = Math.hypot(dx, dy);
+
+          if (other !== this && distance < perceptionRadius) {
+            alignment.x += other.velocity.x;
+            alignment.y += other.velocity.y;
+            cohesion.x += other.position.x;
+            cohesion.y += other.position.y;
+            separation.x -= dx / distance;
+            separation.y -= dy / distance;
+            total++;
+          }
+        }
+
+        if (total > 0) {
+          alignment.x /= total;
+          alignment.y /= total;
+          cohesion.x /= total;
+          cohesion.y /= total;
+          cohesion.x -= this.position.x;
+          cohesion.y -= this.position.y;
+          this.applyForce({ x: alignment.x * 0.05 + cohesion.x * 0.01 + separation.x * 0.1, y: alignment.y * 0.05 + cohesion.y * 0.01 + separation.y * 0.1 });
+        }
+      }
+
+      update() {
+        this.hunger -= 0.1;
+        if (this.hunger < 5) this.hunger = 5;
+        this.flock(boids);
+
+        this.velocity.x += this.acceleration.x;
+        this.velocity.y += this.acceleration.y;
+        const speed = Math.hypot(this.velocity.x, this.velocity.y);
+        if (speed > this.maxSpeed) {
+          this.velocity.x = (this.velocity.x / speed) * this.maxSpeed;
+          this.velocity.y = (this.velocity.y / speed) * this.maxSpeed;
+        }
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.acceleration.x = 0;
+        this.acceleration.y = 0;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.position.x, this.position.y);
+        ctx.fillStyle = `rgb(${Math.round(this.hunger * 2.5)}, 0, ${255 - Math.round(this.hunger * 2.5)})`;
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const boids = Array.from({ length: 100 }, () => new Boid());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawGrass();
+      for (let boid of boids) {
+        boid.update();
+        boid.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

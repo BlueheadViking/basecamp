@@ -17,53 +17,146 @@
                 Back
             </a>
             
-            <h1>Coming Soon</h1>
-            <p class="date"><strong>00-00-0000</strong></p>
+            <h1>My Infamous Map Experiment</h1>
+            <p class="date"><strong>2025</strong></p>
             <p class="description">
-                This is currently an empty page. It will be used as the template going forward. There will be two sentences here, and then a few paragraphs and images below.
+                GeoPic started as an idea that came up while playing with maps for work. As a UX designer, I needed to compare Mapbox styles at the same zoom level and location. Manually mocking this up felt tedious, so I decided to explore building it myself. AI is pretty good nowdays (2024) - how hard could it possibly be? 
             </p>
         </header>     
 
+        <div class="image-wrapper">
+            <img src="../images\jobs-mockup.avif" alt="Project Visual" class="full-width-image">
+        </div>
+
         <div class="section-header">
-            <h3>Finding Light in the Darkness: Good Things Happening in the World Right Now</h3>
 
-<p>In a world that often feels overwhelmed by crisis and chaos, it’s easy to forget that positive change is happening all around us. While headlines may be dominated by conflict, climate concerns, and economic struggles, there are also stories of progress, hope, and resilience. As Winston Churchill once said, <strong>“The pessimist sees difficulty in every opportunity. The optimist sees opportunity in every difficulty.”</strong> Today, let’s take a moment to focus on the good things happening in the world and remind ourselves why it’s important to stay hopeful.</p>
 
-<h3>1. Breakthroughs in Medicine and Health</h3>
+            <h3>How I started</h3>
+            <p>GeoPic started as an idea that came up while playing with maps for work. As a UX designer, I needed to compare Mapbox styles at the same zoom level and location. Manually mocking this up felt tedious, so I decided to explore building it myself. AI is pretty good nowdays (2024) - how hard could it possibly be?
 
-<p>In recent years, medical advancements have accelerated at an incredible pace. Scientists are making remarkable progress in the fight against diseases like cancer, Alzheimer’s, and even rare genetic disorders. New treatments, including AI-powered drug discovery, are helping to create therapies faster than ever before. The recent breakthroughs in mRNA technology, which led to the rapid development of COVID-19 vaccines, are now being used to tackle other infectious diseases and even cancer.</p>
+                Using ChatGPT and Mapbox, I started with getting a map to show up in a local .html file, I had done this for work and so didnt take too long. I played around with the Mapbox Styles a fair bit (I thought it was pretty cool) before soon realising that this project was quickly exceeding the pace that notepad could keep up with. Time to delve into Visual Studio Code - something I was not very familiar with (My jam is Figma)
+                
+                The first real step that made something real was using AI to create me a random selection of points around the globe. I tinkered with this a little, adding lines between all the markers, lines between the closest five markers, and then markers within a proximity, colouring by distance. This was pretty cool, I had always percieved mapping as a tough problem, but I had created a prototype in less than an hour. Fasinating.
+                
+                After a little fun mucking about, I decided to continue by generating some markers across New Zealand. It worked well enough for a proof of concept, though the markers weren’t confined to country borders and weren’t very accurate. It was good enough to help me realise some of my ideas
+                
+                The timing couldn’t have been better—AI tools were rapidly evolving. partway through the project, GPT introduced beta versions of canvas and reasoning capabilities, and suddenly, prototyping became much more efficient. I could view all my code on one canvas and make changes to it without needing to copy paste my whole codebase. (apologies to all of the actual developers I just offended)
+                
+                Initially, my goal was simple: build something real that people might use. But as the project progressed, the vision shifted. I started imagining GeoPic as a platform for location-based photography competitions or a way to showcase community-nominated photos from around the world, this quickly migrated to a way to show my photos geographically. The more I worked on it the more inspired I got.
+                
+                Getting the map up and running was the first milestone. But I couldn't use random locations forever, and I knew for sure I wasn't going to do a commit every time I needed to update the data. I used Google Sheets for data storage - this also allowed me to update data, and copy paste real world locations. Is this the start of a back-end?
+                
+                A coworker introduced me to the live preview feature on VS Code, which became a game-changer—before that, I was clumsily building and uploading code just to test it!
+                
+                The moment I saw my first functional, interactive map felt incredible. It was no longer just a mockup; it was real. I could pan around and see real-world locations. Mapping has always excited me, so this was a big deal.
+                
+                Interestingly, I later discovered that Mapbox has a built-in style preview feature that could have simplified my initial work experiment. In hindsight, though, I’m glad I didn’t know—it pushed me to learn more by doing.</p>
+            
 
-<p>Additionally, global health initiatives are making a tangible difference. Polio is now on the verge of eradication, and efforts to combat malaria have led to a significant decrease in cases. Organizations and governments are working together to provide vaccines, clean water, and essential medical care to communities in need.</p>
+            
+            <h3>Goals and Objectives</h3>
+            <p>The goal? Design and build the next generation job management system, capable of being built onto and heavily used for the next 10 years. To help with this, some key objectives were set.</p>
+        
+            
+            <ul>
+            <li>Must be scalable</li>
+            <li>Must be specific</li>
+            <li>Must collect as much information as possible</li>
+            <li>Must work on mobile, tablet, and desktop</li>
+            </ul>
+            
+            <h3>Problem Statement</h3>
+            <p>The project was prioritized because the existing system was beginning to become delicate. Ten years of technology change was taking its toll. While this didn’t have an effect on its daily life, it meant that changing anything introduced risk, not ideal for such an important product.</p>
+            
+            <p>Job management is just a section of the work to do in Tabula Live. Tabula Live will eventually take over all of Tabula’s current operations including reporting, device management, GPS tracking, proof of placement, and guidance systems.</p>
+            
+            <h3>My Role</h3>
+            <p>On this project, my role was UX/UI/Product Designer. I covered:</p>
+            <ul>
+            <li>Customer Interviews</li>
+            <li>Interface Design</li>
+            <li>User Experience</li>
+            <li>Documentation</li>
+            </ul>
+            
+            <h3>Key Insights</h3>
+            <ul>
+            <li>We needed to do more than spreading and spraying</li>
+            <li>Not all jobs have the same components</li>
+            <li>Customization was more important than expected</li>
+            <li>More and more operators were using mobile devices to do their job management</li>
+            <li>Every contractor said they weren’t good with technology</li>
+            <li>Customers knew the job management process better than most Tabula Staff</li>
+            </ul>
+            
+            <h3>Process</h3>
+            <p>From the research period, it was clear that there were some pain points.</p>
+            <ul>
+            <li>TMO was built for a very defined customer, spreading contractors (and it served them very well!)</li>
+            <li>A user could create a job from different places in TMO and would go through different workflows</li>
+            <li>Job creation workflow was complex for even simple jobs</li>
+            <li>Workflow and UI were not intuitive for new/long-term sporadic users</li>
+            <li>Didn’t scale well</li>
+            <li>Catered to power users who had gone on a steep learning curve</li>
+            </ul>
+            
+            <p>One particularly challenging pain point was not at the customer end - but rather internally. Before me, several designers had attempted to tackle this complex problem. Each design and implementation had taken a toll on the remaining team. Having a new designer (me!) on the project to redesign it again did not fill the team with hope. To combat this, I put together research, presentations, and got the team together to align everyone. Slide decks took a lot of time, but the hive mindset afterward was invaluable. Que the whiteboard scribbles..</p>
 
-<h3>2. The Green Revolution: Fighting Climate Change</h3>
+            <div class="image-wrapper">
+                <img src="../images\whiteboard-001.avif" alt="Project Visual" class="full-width-image">
+            </div>
 
-<p>While climate change remains a serious challenge, there is also good news. Renewable energy sources like solar and wind power are now cheaper and more widely adopted than ever before. The European Union recently hit a milestone where <strong>renewable energy outproduced fossil fuels</strong>, signaling a shift towards a cleaner, greener future.</p>
+            <div class="image-wrapper">
+                <img src="../images\whiteboard-002.avif" alt="Project Visual" class="full-width-image">
+            </div>
 
-<p>Additionally, major companies and governments are investing in carbon capture technologies and reforestation projects to restore natural ecosystems. The Amazon Rainforest, often seen as the ‘lungs of the Earth,’ is now benefiting from large-scale conservation efforts. Across the globe, sustainable agriculture practices are reducing deforestation and promoting biodiversity.</p>
+            <div class="image-wrapper">
+                <img src="../images\whiteboard-003.avif" alt="Project Visual" class="full-width-image">
+            </div>
 
-<p>As Theodore Roosevelt once said, <strong>“Do what you can, with what you have, where you are.”</strong> Individuals, businesses, and governments are stepping up to make meaningful changes for the planet.</p>
+            
+            
+            <h3>User Experience</h3>
+            <p>In terms of UX, I had a few clear ideas of how I wanted it improved.</p>
+            <ul>
+            <li>Ability to create a job from where it makes the most sense</li>
+            <li>Ability to scale and be ready for different industries with different needs</li>
+            <li>Make the simple easy, and the complex possible</li>
+            <li>Collect high-quality data to make informed decisions later</li>
+            </ul>
+            
+            <p>Fair to say, I succeeded. Jobs could be created from the main area the user lives - the main map, as well as within the Jobs tab. Each job started by selecting an activity, be it spreading or spraying to start, but could eventually be configured to do pest control, surveying, fuel transport, the list goes on.</p>
+            
+            <div class="image-wrapper">
+                <img src="../images\jobs-002.avif" alt="Project Visual" class="full-width-image">
+            </div>
 
-<h3>3. Acts of Kindness and Human Solidarity</h3>
 
-<p>Despite the negativity that often dominates the news, there are countless acts of kindness happening every day. Communities are coming together to support those in need, whether it’s providing aid for displaced people, helping rebuild after natural disasters, or simply looking out for their neighbors.</p>
+            <h3>Key Challenge: Variable Rate Jobs</h3>
+            <p>A key challenge I faced was that we currently had a complex way of handling variable rate jobs (jobs where fertilizer gets applied at different rates across an area) - Analytics showed that it was not used much at all, and the general consensus was that it was an underused feature and shouldn’t be prioritized.</p>
+            
+            <p>Halfway through, the government released a new scheme where farmers had to report on all synthetic fertilizer applied on farms. This paired with COVID-19 driving fertilizer prices 5-10x higher than before. The insight? Farmers want their fertilizer to go further. As a team, we decided that we should place importance on allowing farmers to decide what quantity of fertilizer they want where.</p>
+            
+            <h3>Multi-Rate Job Creation</h3>
+            <p>This led to a fairly extensive short project on adding multi-rate to the job creation process. We needed to cater to two key user stories:</p>
+            <ul>
+            <li><strong>As a farmer</strong>, I want to define the amount of fertilizer I have upfront, then divide it between a set of paddocks because I have already bought the fertilizer, and I want to use it as efficiently as possible.</li>
+            <li><strong>As a farmer</strong>, I want to set the rate that the fertilizer needs to go on a set of paddocks so that I have enough grass to feed my animals.</li>
+            </ul>
+            
+            <p>This meant that I needed to have a system that could either calculate the total or set it for a selected group of paddocks. An early mockup allowed the user to create block-groups to assign a rate/total to. This made sense, but was the wrong choice. It went against the ethos of making the simple easy and the complex possible. This workflow forced every farmer that created a spreading job to add a block group (even if there was only one!).</p>
+            
+            <p>A second implemented iteration had more time spent on the UX, in terms of workflow and button clicks. I am proud of how it turned out. Key differences it had over the existing system were:</p>
+            <ul>
+            <li>Users could flick between “by total” and “by rate” easily without losing data</li>
+            <li>Users could carry on with the simple workflow of all the blocks having the same rate/total, and choose to go deeper by selecting “Multi-Rate Job”</li>
+            <li>Visual display of rate was indicated by adding more black or white to the requested block (Lighter = Less, Darker = More)</li>
+            <li>Users could start an order like normal, add blocks with a rate to the job, and then move into multi-rate. The existing set of blocks and rates would be wrapped up into the first block group</li>
+            <li>When there were two or more groups, selecting the dropdown would grey out any other block group on the map, so it was clear which the user was editing</li>
+            </ul>
+            
 
-<p>In the past year alone, we’ve seen inspiring humanitarian efforts. Volunteers have mobilized to support refugees, strangers have helped each other through financial hardships, and communities have stood in solidarity against injustice. Social movements advocating for equality, human rights, and education continue to push for a more just world.</p>
 
-<p>As Mahatma Gandhi famously said, <strong>“Be the change you wish to see in the world.”</strong> Every small act of kindness, no matter how simple, contributes to a larger movement of positivity and hope.</p>
-
-<h3>4. Technological Innovations for a Better Future</h3>
-
-<p>Technology continues to improve lives in unexpected ways. Breakthroughs in <strong>artificial intelligence</strong> and <strong>robotics</strong> are enhancing industries like healthcare, education, and disaster response. AI is being used to detect diseases early, while drones are delivering medicine to remote areas. In education, more children than ever before have access to online learning, bridging the gap for underserved communities.</p>
-
-<p>Furthermore, space exploration is opening new frontiers. NASA’s <strong>James Webb Space Telescope</strong> has provided breathtaking images of the universe, deepening our understanding of space. Private and government-led space missions are working on sustainable space travel, potentially paving the way for scientific discoveries that could benefit all of humanity.</p>
-
-<h3>Why Staying Positive Matters</h3>
-
-<p>It’s natural to feel overwhelmed by negative news, but focusing solely on problems can lead to fear and hopelessness. Instead, we should remember the words of Helen Keller: <strong>“Keep your face to the sunshine and you cannot see a shadow.”</strong></p>
-
-<p>Maintaining a positive outlook does not mean ignoring challenges—it means recognizing progress, celebrating victories, and believing in the power of resilience. Hope is a force that fuels action, and optimism is contagious. When we choose to see the good in the world, we inspire others to do the same.</p>
-
-<p>As we move forward, let’s remind ourselves that despite the hardships, there is still kindness, progress, and hope. Change is happening, and each of us has the power to contribute to a brighter future.</p>
 
         
         </div>

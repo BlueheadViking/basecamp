@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boid Fish Simulation - Food & Animated Opacity</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(120deg, #1a1a1a, #333);
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="boidCanvas"></canvas>
+
+  <script>
+    // Setup canvas
+    const canvas = document.getElementById('boidCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    // Background hue animation
+    let hue = 0;
+    function updateBackground() {
+      hue += 0.1;
+      if (hue > 360) hue = 0;
+      document.body.style.background = `linear-gradient(120deg, hsl(${hue}, 20%, 15%), hsl(${(hue + 60) % 360}, 20%, 10%))`;
+    }
+
+    // Store food locations
+    const foods = [];
+
+    // Listen for left clicks to drop food
+    window.addEventListener('click', (e) => {
+      // e.button === 0 is left click
+      if (e.button === 0) {
+        foods.push({ x: e.clientX, y: e.clientY, radius: 5 });
+      }
+    });
+
+    class Boid {
+      constructor() {
+        // Random start
+        this.position = {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height
+        };
+        // Slightly random initial velocity
+        this.velocity = {
+          x: (Math.random() - 0.5) * 2,
+          y: (Math.random() - 0.5) * 2
+        };
+        this.acceleration = { x: 0, y: 0 };
+
+        // Randomize speeds a bit
+        this.maxSpeed = 2.5 + Math.random() * 1;  // range: 2.5 - 3.5
+        this.maxForce = 0.08 + Math.random() * 0.04; // range: 0.08 - 0.12
+
+        // Make all fish white
+        // We'll handle opacity via alpha
+
+        // We'll animate alpha from 0.3 to 1.0 randomly
+        this.alpha = Math.random() * 0.7 + 0.3;     // current alpha between 0.3 - 1.0
+        this.alphaGoal = Math.random() * 0.7 + 0.3; // new random target alpha
+        this.alphaSpeed = 0.002 + Math.random() * 0.003; // how fast alpha changes
+      }
+
+      update() {
+        // Basic physics
+        this.velocity.x += this.acceleration.x;
+        this.velocity.y += this.acceleration.y;
+
+        const speed = Math.hypot(this.velocity.x, this.velocity.y);
+        if (speed > this.maxSpeed) {
+          this.velocity.x = (this.velocity.x / speed) * this.maxSpeed;
+          this.velocity.y = (this.velocity.y / speed) * this.maxSpeed;
+        }
+
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+
+        // Reset acceleration
+        this.acceleration.x = 0;
+        this.acceleration.y = 0;
+
+        // Bounce off screen edges
+        this.constrain();
+
+        // Gradually animate alpha
+        this.animateAlpha();
+      }
+
+      animateAlpha() {
+        // Move alpha toward alphaGoal
+        if (Math.abs(this.alpha - this.alphaGoal) < 0.01) {
+          // pick a new target
+          this.alphaGoal = Math.random() * 0.7 + 0.3;
+        } else {
+          // increment alpha in direction of alphaGoal
+          if (this.alpha < this.alphaGoal) {
+            this.alpha += this.alphaSpeed;
+          } else {
+            this.alpha -= this.alphaSpeed;
+          }
+          // clamp alpha
+          if (this.alpha > 1) this.alpha = 1;
+          if (this.alpha < 0.3) this.alpha = 0.3;
+        }
+      }
+
+      applyForce(force) {
+        this.acceleration.x += force.x;
+        this.acceleration.y += force.y;
+      }
+
+      constrain() {
+        if (this.position.x < 0) {
+          this.position.x = 0;
+          this.velocity.x *= -1;
+        } else if (this.position.x > canvas.width) {
+          this.position.x = canvas.width;
+          this.velocity.x *= -1;
+        }
+        if (this.position.y < 0) {
+          this.position.y = 0;
+          this.velocity.y *= -1;
+        } else if (this.position.y > canvas.height) {
+          this.position.y = canvas.height;
+          this.velocity.y *= -1;
+        }
+      }
+
+      flock(boids) {
+        const perceptionRadius = 100;
+        let alignment = { x: 0, y: 0 };
+        let cohesion = { x: 0, y: 0 };
+        let separation = { x: 0, y: 0 };
+        let total = 0;
+
+        for (let other of boids) {
+          const dx = other.position.x - this.position.x;
+          const dy = other.position.y - this.position.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (other !== this && dist < perceptionRadius) {
+            alignment.x += other.velocity.x;
+            alignment.y += other.velocity.y;
+
+            cohesion.x += other.position.x;
+            cohesion.y += other.position.y;
+
+            // Separation (weighted more if closer)
+            const separationFactor = 1.0;
+            separation.x -= (dx / (dist * dist)) * separationFactor;
+            separation.y -= (dy / (dist * dist)) * separationFactor;
+
+            total++;
+          }
+        }
+
+        if (total > 0) {
+          alignment.x /= total;
+          alignment.y /= total;
+          cohesion.x /= total;
+          cohesion.y /= total;
+
+          cohesion.x -= this.position.x;
+          cohesion.y -= this.position.y;
+
+          this.applyForce(scaleVector(alignment, 0.02));
+          this.applyForce(scaleVector(cohesion, 0.008));
+        }
+
+        this.applyForce(separation);
+
+        // Add random wander
+        const wanderStrength = 0.15;
+        const wander = {
+          x: (Math.random() - 0.5) * 2 * wanderStrength,
+          y: (Math.random() - 0.5) * 2 * wanderStrength
+        };
+        this.applyForce(wander);
+      }
+
+      // Food attraction: find nearest food and move toward it
+      feed(foods) {
+        if (foods.length === 0) return;
+        let closestFood = null;
+        let closestDist = Infinity;
+
+        for (let f of foods) {
+          const dx = f.x - this.position.x;
+          const dy = f.y - this.position.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestFood = f;
+          }
+        }
+
+        // If there's a closest food and it's within a certain range, head towards it
+        if (closestFood && closestDist < 300) {
+          // vector from boid to food
+          const dx = closestFood.x - this.position.x;
+          const dy = closestFood.y - this.position.y;
+          const dist = Math.hypot(dx, dy);
+          // normalized
+          if (dist !== 0) {
+            const desired = { x: dx / dist, y: dy / dist };
+            // scale up as attraction force
+            const attractionStrength = 0.05;
+            desired.x *= attractionStrength;
+            desired.y *= attractionStrength;
+            this.applyForce(desired);
+          }
+
+          // If very close, remove the food (simulate "eating")
+          if (closestDist < 10) {
+            const idx = foods.indexOf(closestFood);
+            if (idx >= 0) {
+              foods.splice(idx, 1);
+            }
+          }
+        }
+      }
+
+      draw() {
+        ctx.save();
+        const angle = Math.atan2(this.velocity.y, this.velocity.x);
+        ctx.translate(this.position.x, this.position.y);
+        ctx.rotate(angle);
+
+        // white fish, incorporate alpha
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+
+        // smaller fish shape
+        ctx.beginPath();
+        ctx.moveTo(8, 0);
+        ctx.quadraticCurveTo(0, 6, -6, 0);
+        ctx.quadraticCurveTo(0, -6, 8, 0);
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    function scaleVector(v, s) {
+      return { x: v.x * s, y: v.y * s };
+    }
+
+    // Create swarm
+    const boids = [];
+    for (let i = 0; i < 150; i++) {
+      boids.push(new Boid());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      updateBackground();
+
+      // Draw existing foods
+      drawFoods();
+
+      for (let boid of boids) {
+        // The fish do normal flocking
+        boid.flock(boids);
+        // Then they check for food
+        boid.feed(foods);
+        // Then update & draw
+        boid.update();
+        boid.draw();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    function drawFoods() {
+      ctx.save();
+      ctx.fillStyle = '#FFD700'; // gold color for food
+      for (let f of foods) {
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    animate();
+  </script>
+</body>
+</html>

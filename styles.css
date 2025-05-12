@@ -56,6 +56,15 @@ body {
     max-width: 800px;
     margin: auto;
     padding: 16px;
+    height: none;
+    align-content: center;
+}
+
+.main-header {
+    text-align: left;
+    max-width: 800px;
+    margin: auto;
+    padding: 16px;
     height: 60vh;
     align-content: center;
 }

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Page</title>
+    <link rel="stylesheet" href="../styles.css">
+
+
+</head>
+<body>
+    
+    <div class="container">
+        <header class="header">
+            <a href="/index.html" class="btn-tertiary">
+                <span class="material-icons">arrow_back</span>
+                Back
+            </a>
+            
+            <h1>Tabula App</h1>
+            <p class="date"><strong>2025</strong></p>
+            <p class="description">
+                In just five weeks, I designed and shipped Tabula’s first-ever mobile app for horticultural field workers — without prior mobile experience. Working solo and under pressure, I used AI to manage shifting requirements, prototyped fast, and built a highly usable, visually polished experience. I navigated tight timelines, complex stakeholders, and messy implementation dynamics to deliver a product that’s modern, intuitive, and ready for real-world use.
+
+ 
+            </p>
+        </header>     
+
+        <div class="image-wrapper">
+            <img src="../images\tabula-app-hero-2.png" alt="Hero Shot" class="full-width-image">
+        </div>
+
+        <div class="section-header">
+        
+            <h3>Context</h3>
+            <p>In early 2025, I was tasked with designing Tabula’s first ever mobile app — a ground-up tool for horticultural field workers. It marked a major shift for the company, and a high-stakes opportunity for me as a designer: five weeks to go from zero to live demo, with no prior mobile app experience.</p>
+            <p>The brief? High priority, high impact, and a tight five-week deadline to create a no-smoke-and-mirrors demo. The product needed to feel real and solid, ready for stakeholders to present to major horticultural clients. We were racing against the clock — miss the window, and we’d miss a year of onboarding, training, and sales opportunity.</p>
+        
+            <h3>Constraints</h3>
+            <p>There were four major risks I identified early:</p>
+            <ul>
+                <li><strong>Time pressure</strong> — Five weeks is a fast turnaround for an app. This would mean building while designing — laying track in front of a moving train.</li>
+                <li><strong>Limited user access</strong> — I believe deeply in talking to users, but in this case I had no access to end users. All insights had to come from very senior stakeholders.</li>
+                <li><strong>Steep learning curve</strong> — This was my first time designing a mobile app. I needed to learn platform conventions, make decisions quickly, and justify those decisions on the fly.</li>
+                <li><strong>High-stakes stakeholder management</strong> — With strong personalities involved, I needed to manage differing visions, navigate ambiguity, and keep the core design from being pulled in too many directions.</li>
+            </ul>
+            <p>Each of these risks had the potential to derail the project — so I looked for ways to de-risk early and often.</p>
+        
+            <h3>My Role</h3>
+            <p>I was the sole designer on the project — covering everything from understanding the business goals, to designing, validating, and documenting the user experience. I led the full design process under pressure, without a product manager or mobile experience to lean on.</p>
+        
+            <h3>Adopting an AI-First Process</h3>
+            <p>With limited time and no product manager to help filter changing requirements, I leaned on AI as a stand-in teammate. I didn’t just use it for research — I used it to help run the entire process.</p>
+            <p>One of the biggest early challenges was managing the shifting brief. There were multiple documents in circulation — business goals, user stories, spec sheets — and they changed frequently. Rather than manually compare versions or waste time deciphering changes, I uploaded them into a ChatGPT project and queried them like a shared brain.</p>
+            <p>To improve results, I created a tailored prompt to simulate the role of a product-minded teammate. It helped me weigh trade-offs, flag inconsistencies, and frame decisions in language that resonated with stakeholders. This didn’t just speed things up — it gave me confidence and clarity during a fast-moving project.</p>
+            <p>This process will absolutely be part of how I work going forward.</p>
+        
+            <h3>Early Design Work</h3>
+            <div class="image-wrapper">
+                <img src="../images\tabula-app-001.png" alt="Hero Shot" class="full-width-image">
+            </div>
+            <p>Before opening Figma, I flew out to work on-site with some of our key stakeholders — including the chairman of the board. Spending time face-to-face meant I could deeply understand the product vision and get fast feedback on rough concepts.</p>
+            <p>He’d regularly drop in to share thoughts and direction — strong opinions, but open to letting me drive decisions. That kind of access comes with pressure: I’d be the one responsible for whether this thing worked. But it also created the conditions to move quickly.</p>
+            <div class="image-wrapper">
+                <img src="../images\tabula-app-002.png" alt="Hero Shot" class="full-width-image">
+            </div>
+            <p>I started analog — post-it notes, whiteboards, quick sketches. These made it easy to adjust course and save the product from heading down the wrong track. More importantly, they helped stakeholders <em>see</em> how I was thinking, which built trust in the process.</p>
+        
+            <h3>From Sketch to Screen</h3>
+            <div class="image-wrapper">
+                <img src="../images\tabula-app-003.png" alt="Hero Shot" class="full-width-image">
+            </div>
+            <p>With the foundational flows validated on paper, I transitioned into Figma to explore how the product would feel in motion. Quick, interactive prototypes helped me explore transitions, dead ends, and navigation paths — and exposed ideas that wouldn’t have worked in practice.</p>
+            <p>This was the biggest blank canvas I’d ever had. There was no inherited UI, no existing visual system. Everything was mine to define — so I focused early on the <em>feel</em> of the product.</p>
+            <p>I wanted this to feel modern, responsive, and intuitive — especially on mobile, where juggling content and map data can get confusing fast. Microinteractions, smooth transitions, and subtle animation became important tools to help users maintain context as they move between screens.</p>
+            <p>One key pattern I introduced was the use of bottom-up slide-in cards — helping users stay grounded as they flick between task lists and individual jobs on the map.</p>
+        
+            <h3>High-Fidelity Design Decisions</h3>
+            <div class="image-wrapper">
+                <img src="../images\tabula-app-004.png" alt="Hero Shot" class="full-width-image">
+            </div>
+            <p>As I moved into higher fidelity mockups, I focused on refining the visual polish and mobile usability to ensure the product felt purposeful, modern, and comfortable to use in the field. I introduced rounded corners and used iOS-specific corner smoothing, creating a friendlier, more approachable interface that felt less mechanical — especially important for users who aren’t tech-native or who may be interacting with the app quickly or in tough outdoor conditions.</p>
+            <p>Button sizing was deliberately generous, with a minimum height of 64px, to accommodate a range of finger sizes and reduce the chance of input error on bumpy rides or with gloved hands. Microanimations and subtle transitions were added to boost clarity and delight across the experience. These animations weren’t just aesthetic — they gave users helpful feedback during key interactions, like expanding a floating action button or opening the home menu, reinforcing a sense of flow and continuity throughout the interface.</p>
+            <p>These refinements helped bring the app to life, turning functional workflows into something more intuitive and pleasant to use under real-world pressures.</p>
+        
+            <h3>Pre-Development Outcome</h3>
+            <p>Before development began, I felt confident in the state of the design work. The research was solid, with every major decision grounded in clear rationale — from workflow logic to visual styling. The prototypes felt cohesive, usable, and responsive, and I was personally happy with how the UI and UX came together.</p>
+            <p>Stakeholder feedback during this phase was generally positive. The people I worked most closely with seemed aligned on the direction, and there was a shared sense of momentum and excitement. I had structured the Figma file with care: using consistent styles, reusable components, and thoughtful documentation — everything a developer should need to interpret and implement the design efficiently.</p>
+        
+            <h3>Building the Product</h3>
+            
+            <p>Despite having a strong prototype, clear rationale, and solid documentation, the development phase surfaced a new set of challenges. While I had expected some iteration, I was surprised at how little attention was paid to the Figma designs during build. Questions I had already resolved visually or through annotations were being asked again — often repeatedly — which made it clear many people had not reviewed the designs in detail.</p>
+            <p>This led to a flurry of open-ended questions during development, many of which could have been avoided with closer collaboration or upfront alignment. What caught me off guard most, though, was the nature of the feedback. I didn’t receive any positive reinforcement about the design work — instead, feedback often came in the form of blunt, unhelpful opinions like “I hate this” or “This doesn’t work,” without context or alternatives. These moments were difficult to navigate and left me second-guessing how to respond constructively.</p>
+            <p>As the product came together in its initial build, something felt off. The app felt hard to use — even unnatural — and I started to question whether I had made poor design decisions. But when I looked deeper, it became clear: this wasn’t a single issue, it was death by a thousand cuts. Fonts were missing. Radiuses were inconsistent. Animations were poorly timed or skipped entirely. Components I had carefully designed had been rebuilt in ways that lost their intent. The result was a product that technically matched the Figma file, but emotionally missed the mark.</p>
+            <p>To surface and resolve these issues, I created a detailed polish tracker: a spreadsheet logging every misalignment, inconsistency, and design bug. That list grew to over 100 individual items. Documenting it in this way helped shift the conversation from “is the design wrong?” to “let’s fix the implementation.”</p>
+            <div class="image-wrapper">
+                <img src="../images\tabula-app-006.png" alt="Hero Shot" class="full-width-image">
+            </div>
+            <p>Additionally, I discovered a few blind spots in my design — particularly around edge cases like empty states and a dedicated view mode for certain tasks. While these didn’t break the product, they did create additional friction during implementation and underscored the value of working closely with developers and testers earlier in the process.</p>
+        
+            <h3>Conclusion</h3>
+            <div class="image-wrapper">
+            <img src="../images\tabula-app-hero.png" alt="Hero Shot" class="full-width-image">
+        </div>
+            <p>Overall, the project went well — we shipped a working product on time, despite the challenges. While several issues arose during implementation, most were solvable with the right data, clear documentation, and persistent iteration. Designing for a space like agriculture, where there are very few examples of good UX in task management and field observation, made this even more complex — but also more rewarding.</p>
+            <p>Beyond the design work itself, I learned just how much of the product design process involves navigating people, not just pixels. Building alignment, handling conflicting opinions, and defending user-centric decisions in a high-pressure environment all became core parts of the job.</p>
+            <p>For a first-time native mobile app, I’m proud of how quickly it came together and how far the design evolved in such a short timeframe. The project sharpened my instincts, pushed my skills, and left me more confident in my ability to lead complex, high-impact work under pressure.</p>
+        
+        </div>
+
+    </div>
+        
+    <footer class="footer">
+        <div class="footer-svg"></div>
+        <div class="footer-content">Copyright© Griffin 2025</div>
+    </footer>
+        
+    </body>
+    </html>

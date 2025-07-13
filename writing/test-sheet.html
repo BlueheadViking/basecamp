@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Domain Knowledge Graph - Anti-Tangle</title>
+  <style>
+    body { margin:0; background: #181818; color: #fff; font-family: Inter, sans-serif;}
+    .node-label { font: 14px Inter, Arial, sans-serif; pointer-events:none; }
+    svg { width: 100vw; height: 100vh; display: block;}
+  </style>
+</head>
+<body>
+<svg></svg>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const nodes = [
+  { id: "Griffin's Domain Knowledge", root: true },
+  { id: "Aviation" }, { id: "Agriculture" }, { id: "Mapping" },
+  { id: "Ground Ops" }, { id: "Product Design & SaaS" }, { id: "Other" },
+  // Aviation
+  { id: "AVT" }, { id: "Spray Ops" }, { id: "Navigation" }, { id: "Firefighting Aviation" }, { id: "Fleet Mgmt" }, { id: "Guidance Lines" },
+  // Agriculture
+  { id: "Spreading" }, { id: "Proof of Placement" }, { id: "Variable Rate" }, { id: "Orchard/Hort" }, { id: "Field Tasking" }, { id: "Soil Health" }, { id: "Crop Planning" },
+  // Mapping
+  { id: "Feature Editing" }, { id: "Mapbox" }, { id: "Geospatial Data" }, { id: "Layer Control" }, { id: "Photo Mapping" }, { id: "Job Mapping" },
+  // Ground Ops
+  { id: "GVT" }, { id: "Mosquito Ctrl" }, { id: "Tasking" }, { id: "Field Capture" },
+  // Product Design & SaaS
+  { id: "UX/UI Design" }, { id: "Design Systems" }, { id: "Prototyping" }, { id: "SaaS Systems" }, { id: "Customer Eng." }, { id: "Validation" }, { id: "Figma" }, { id: "AI Tools" },
+  // Other
+  { id: "Photography" }, { id: "Side Projects" }, { id: "Game Dev" }
+];
+
+const links = [
+  { source: "Griffin's Domain Knowledge", target: "Aviation" },
+  { source: "Griffin's Domain Knowledge", target: "Agriculture" },
+  { source: "Griffin's Domain Knowledge", target: "Mapping" },
+  { source: "Griffin's Domain Knowledge", target: "Ground Ops" },
+  { source: "Griffin's Domain Knowledge", target: "Product Design & SaaS" },
+  { source: "Griffin's Domain Knowledge", target: "Other" },
+  // Aviation
+  { source: "Aviation", target: "AVT" },
+  { source: "Aviation", target: "Spray Ops" },
+  { source: "Aviation", target: "Navigation" },
+  { source: "Aviation", target: "Firefighting Aviation" },
+  { source: "Aviation", target: "Fleet Mgmt" },
+  { source: "Aviation", target: "Guidance Lines" },
+  // Agriculture
+  { source: "Agriculture", target: "Spreading" },
+  { source: "Agriculture", target: "Proof of Placement" },
+  { source: "Agriculture", target: "Variable Rate" },
+  { source: "Agriculture", target: "Orchard/Hort" },
+  { source: "Agriculture", target: "Field Tasking" },
+  { source: "Agriculture", target: "Soil Health" },
+  { source: "Agriculture", target: "Crop Planning" },
+  // Mapping
+  { source: "Mapping", target: "Feature Editing" },
+  { source: "Mapping", target: "Mapbox" },
+  { source: "Mapping", target: "Geospatial Data" },
+  { source: "Mapping", target: "Layer Control" },
+  { source: "Mapping", target: "Photo Mapping" },
+  { source: "Mapping", target: "Job Mapping" },
+  // Ground Ops
+  { source: "Ground Ops", target: "GVT" },
+  { source: "Ground Ops", target: "Mosquito Ctrl" },
+  { source: "Ground Ops", target: "Tasking" },
+  { source: "Ground Ops", target: "Field Capture" },
+  // Product Design & SaaS
+  { source: "Product Design & SaaS", target: "UX/UI Design" },
+  { source: "Product Design & SaaS", target: "Design Systems" },
+  { source: "Product Design & SaaS", target: "Prototyping" },
+  { source: "Product Design & SaaS", target: "SaaS Systems" },
+  { source: "Product Design & SaaS", target: "Customer Eng." },
+  { source: "Product Design & SaaS", target: "Validation" },
+  { source: "Product Design & SaaS", target: "Figma" },
+  { source: "Product Design & SaaS", target: "AI Tools" },
+  // Other
+  { source: "Other", target: "Photography" },
+  { source: "Other", target: "Side Projects" },
+  { source: "Other", target: "Game Dev" }
+];
+
+const svg = d3.select("svg");
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+const centerNode = nodes.find(n => n.root);
+const mainBranches = nodes.filter(n => links.some(l => l.source === "Griffin's Domain Knowledge" && l.target === n.id));
+
+// --- Custom force to keep first-level branches spread ---
+function spreadMainBranches(radius = 300, strength = 0.28) {
+  // radius: how far out from the center to place branches
+  // strength: how hard to push
+  return function(alpha) {
+    const cx = centerNode.x || width/2, cy = centerNode.y || height/2;
+    const n = mainBranches.length;
+    mainBranches.forEach((node, i) => {
+      const targetAngle = (2 * Math.PI * i / n) - Math.PI/2;
+      const tx = cx + Math.cos(targetAngle) * radius;
+      const ty = cy + Math.sin(targetAngle) * radius;
+      node.vx += (tx - node.x) * strength * alpha;
+      node.vy += (ty - node.y) * strength * alpha;
+    });
+  };
+}
+
+const simulation = d3.forceSimulation(nodes)
+  .force("link", d3.forceLink(links).id(d=>d.id)
+    .distance(d => d.source.root ? 260 : 120)
+    .strength(1.2))
+  .force("charge", d3.forceManyBody().strength(-500))
+  .force("center", d3.forceCenter(width/2, height/2))
+  .force("collision", d3.forceCollide().radius(d => d.root ? 75 : 44).strength(1.5))
+  .force("central-repel", centralRepel(0.45, 120))
+  .force("spread-main", spreadMainBranches(320, 0.36)); // tweak these values to your taste
+
+svg.attr("width", width).attr("height", height);
+
+const link = svg.append("g")
+  .attr("stroke", "#bbb")
+  .attr("stroke-opacity", 0.5)
+  .selectAll("line")
+  .data(links)
+  .join("line")
+  .attr("stroke-width", 2);
+
+const node = svg.append("g")
+  .selectAll("g")
+  .data(nodes)
+  .join("g")
+  .call(drag(simulation));
+
+node.append("circle")
+  .attr("r", d => d.root ? 36 : 23)
+  .attr("fill", d => d.root ? "#2bc58b" : "#0D5239")
+  .attr("stroke", "#fff")
+  .attr("stroke-width", d => d.root ? 3.8 : 2);
+
+node.append("text")
+  .attr("class", "node-label")
+  .attr("text-anchor", "middle")
+  .attr("y", 6)
+  .attr("fill", "#fff")
+  .style("font-weight", d => d.root ? 700 : 400)
+  .style("font-size", d => d.root ? "18px" : "14px")
+  .text(d => d.id);
+
+simulation.on("tick", () => {
+  link
+    .attr("x1", d=>d.source.x)
+    .attr("y1", d=>d.source.y)
+    .attr("x2", d=>d.target.x)
+    .attr("y2", d=>d.target.y);
+
+  node.attr("transform", d=>`translate(${d.x},${d.y})`);
+});
+
+function drag(simulation) {
+  function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.2).restart();
+    d.fx = d.x; d.fy = d.y;
+  }
+  function dragged(event, d) {
+    d.fx = event.x; d.fy = event.y;
+  }
+  function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null; d.fy = null;
+  }
+  return d3.drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended);
+}
+
+// Central repel (as before)
+function centralRepel(strength = 0.42, minDist = 120) {
+  return function(alpha) {
+    for (const n of nodes) {
+      if (n.root) continue;
+      let dx = n.x - centerNode.x;
+      let dy = n.y - centerNode.y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 1) dist = 1;
+      if (dist < minDist) {
+        dx = (Math.random()-0.5)*2 + 0.1;
+        dy = (Math.random()-0.5)*2 + 0.1;
+        dist = minDist + 6;
+      }
+      let force = strength * alpha / (dist*0.14);
+      n.vx += dx * force;
+      n.vy += dy * force;
+    }
+  };
+}
+
+window.addEventListener('resize', () => {
+  const w = window.innerWidth, h = window.innerHeight;
+  svg.attr("width", w).attr("height", h);
+  simulation.force("center", d3.forceCenter(w/2, h/2));
+  simulation.alpha(0.5).restart();
+});
+</script>
+</body>
+</html>

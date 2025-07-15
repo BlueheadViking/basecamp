@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Knowledge Graph</title>
+  <style>
+    body { margin: 0; background: #181818; }
+    svg { width: 100vw; height: 100vh; cursor: grab; }
+    .link { stroke: #888; stroke-opacity: 0.6; }
+    .node circle.bullet { fill: #0D5239; transition: r 0.2s; }
+    .node rect.label-bg { fill: #333; }
+    .node text { fill: #fff; font-family: sans-serif; font-size: 14px; pointer-events: none; }
+  </style>
+</head>
+<body>
+<svg></svg>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const width = window.innerWidth;
+const height = window.innerHeight;
+const bulletRadius = 6;
+const scaleFactor = 1.5;
+const duration = 200;
+
+const svg = d3.select("svg");
+const container = svg.append("g");
+svg.call(d3.zoom().scaleExtent([0.5, 5]).on("zoom", ({transform}) => container.attr("transform", transform))).on("dblclick.zoom", null);
+
+const nodes = [
+  {id:"Aviation"},{id:"Agriculture"},{id:"Horticulture"},{id:"Mapping"},{id:"GPS Technology"},
+  {id:"User Experience"},{id:"Field Support App"},{id:"Tabula Live"},{id:"GeoPic"},{id:"Photography"},
+  {id:"Mobile Design"},{id:"Empathy Interviews"},{id:"Motorbike Trip"},{id:"Sheep Herding Game"},
+  {id:"Forest Firefighting"},{id:"Spray"},{id:"Spreading"},{id:"Fertiliser"},{id:"Grass"},
+  {id:"Baling"},{id:"Break Fencing"},{id:"Precision Agriculture"},{id:"Drone Surveying"},
+  {id:"Crop Monitoring"},{id:"Variable Rate Spreading"},{id:"Orchard Management"},{id:"Soil Sampling"},
+  {id:"NDVI Imaging"},{id:"Livestock Tracking"},{id:"GIS"},{id:"Sensor Networks"},{id:"AI Integration"},
+  {id:"Design Thinking"},{id:"User Testing"},{id:"No-Code Tools"},{id:"Supply Chain"},
+  {id:"Weather Forecasting"},{id:"Microclimate Analysis"},{id:"Drone Spraying"},{id:"Yield Prediction"},
+  {id:"Soil Moisture Sensors"},{id:"Remote Sensing"},{id:"RFID Tracking"},{id:"Blockchain Traceability"},
+  {id:"Edge Computing"},{id:"Cloud Services"},{id:"Machine Learning Models"},{id:"UX Prototyping"},
+  {id:"Data Visualization"},{id:"AgriEconomics"},{id:"Sustainable Farming"},{id:"Irrigation Management"},
+  {id:"Pest Management"},{id:"Crop Rotation"},{id:"Farm Machinery"},{id:"Regulatory Compliance"},
+  {id:"Market Analysis"},{id:"User Onboarding"},{id:"Beta Testing"},{id:"Continuous Integration"},
+  {id:"A/B Testing"},{id:"Localization"},{id:"Accessibility"},{id:"Heat Maps"},{id:"Battery Management"},
+  {id:"Telemetry"},{id:"Map Tile Caching"},{id:"Offline Mode"},{id:"Real-Time Collaboration"},
+  {id:"KML Export"},{id:"Shapefile Support"},{id:"Coordinate Systems"},{id:"Time Series Analysis"},
+  {id:"Graph Databases"}
+];
+const links = [
+  {source:"Agriculture",target:"Mapping"},{source:"Horticulture",target:"Field Support App"},
+  {source:"Aviation",target:"GPS Technology"},{source:"Field Support App",target:"Tabula Live"},
+  {source:"GPS Technology",target:"Mapping"},{source:"Tabula Live",target:"User Experience"},
+  {source:"GeoPic",target:"Photography"},{source:"GeoPic",target:"Mapping"},
+  {source:"Mobile Design",target:"User Experience"},{source:"Empathy Interviews",target:"User Experience"},
+  {source:"Motorbike Trip",target:"Photography"},{source:"Sheep Herding Game",target:"Mapping"},
+  {source:"Forest Firefighting",target:"Aviation"},{source:"Spray",target:"Agriculture"},
+  {source:"Spray",target:"Horticulture"},{source:"Spreading",target:"Agriculture"},
+  {source:"Fertiliser",target:"Spreading"},{source:"Grass",target:"Agriculture"},
+  {source:"Baling",target:"Agriculture"},{source:"Break Fencing",target:"Agriculture"},
+  {source:"Mapping",target:"Break Fencing"},{source:"Precision Agriculture",target:"Agriculture"},
+  {source:"Drone Surveying",target:"Mapping"},{source:"Drone Surveying",target:"Aviation"},
+  {source:"Crop Monitoring",target:"Horticulture"},{source:"Variable Rate Spreading",target:"Spreading"},
+  {source:"Variable Rate Spreading",target:"Fertiliser"},{source:"Orchard Management",target:"Horticulture"},
+  {source:"Soil Sampling",target:"Agriculture"},{source:"NDVI Imaging",target:"Drone Surveying"},
+  {source:"NDVI Imaging",target:"Mapping"},{source:"Livestock Tracking",target:"GPS Technology"},
+  {source:"Livestock Tracking",target:"Agriculture"},{source:"GIS",target:"Mapping"},
+  {source:"Sensor Networks",target:"Field Support App"},{source:"Sensor Networks",target:"GPS Technology"},
+  {source:"AI Integration",target:"Tabula Live"},{source:"AI Integration",target:"User Experience"},
+  {source:"Design Thinking",target:"User Experience"},{source:"User Testing",target:"Empathy Interviews"},
+  {source:"No-Code Tools",target:"Field Support App"},{source:"Supply Chain",target:"Agriculture"},
+  {source:"Weather Forecasting",target:"Mapping"},{source:"Weather Forecasting",target:"Drone Surveying"},
+  {source:"Microclimate Analysis",target:"Weather Forecasting"},{source:"Drone Spraying",target:"Spray"},
+  {source:"Yield Prediction",target:"Machine Learning Models"},{source:"Soil Moisture Sensors",target:"Soil Sampling"},
+  {source:"Remote Sensing",target:"NDVI Imaging"},{source:"RFID Tracking",target:"Livestock Tracking"},
+  {source:"Blockchain Traceability",target:"Supply Chain"},{source:"Edge Computing",target:"Sensor Networks"},
+  {source:"Cloud Services",target:"Field Support App"},{source:"Machine Learning Models",target:"AI Integration"},
+  {source:"UX Prototyping",target:"User Experience"},{source:"Data Visualization",target:"Mapping"},
+  {source:"AgriEconomics",target:"Market Analysis"},{source:"Sustainable Farming",target:"Agriculture"},
+  {source:"Irrigation Management",target:"Precision Agriculture"},{source:"Pest Management",target:"Crop Monitoring"},
+  {source:"Crop Rotation",target:"Sustainable Farming"},{source:"Farm Machinery",target:"Baling"},
+  {source:"Regulatory Compliance",target:"Field Support App"},{source:"Market Analysis",target:"Supply Chain"},
+  {source:"User Onboarding",target:"Tabula Live"},{source:"Beta Testing",target:"No-Code Tools"},
+  {source:"Continuous Integration",target:"AI Integration"},{source:"A/B Testing",target:"User Testing"},
+  {source:"Localization",target:"UX Prototyping"},{source:"Accessibility",target:"Mobile Design"},
+  {source:"Heat Maps",target:"Data Visualization"},{source:"Battery Management",target:"Telemetry"},
+  {source:"Telemetry",target:"Sensor Networks"},{source:"Map Tile Caching",target:"GIS"},
+  {source:"Offline Mode",target:"Mobile Design"},{source:"Real-Time Collaboration",target:"Field Support App"},
+  {source:"KML Export",target:"Shapefile Support"},{source:"Shapefile Support",target:"GIS"},
+  {source:"Coordinate Systems",target:"Mapping"},{source:"Time Series Analysis",target:"Machine Learning Models"},
+  {source:"Graph Databases",target:"AI Integration"}
+];
+
+const adjacency = {};
+nodes.forEach(n => adjacency[n.id] = new Set());
+links.forEach(l => { adjacency[l.source].add(l.target); adjacency[l.target].add(l.source); });
+
+const simulation = d3.forceSimulation(nodes)
+  .force("link", d3.forceLink(links).id(d => d.id).distance(200).strength(0.7))
+  .force("charge", d3.forceManyBody().strength(-800).distanceMax(1000))
+  .force("center", d3.forceCenter(width/2, height/2))
+  .force("collision", d3.forceCollide().radius(bulletRadius*4));
+
+const linkEl = container.append("g").attr("class","links")
+  .selectAll("line").data(links).enter().append("line").attr("class","link");
+const nodeEl = container.append("g").attr("class","nodes")
+  .selectAll("g").data(nodes).enter().append("g").attr("class","node")
+  .call(d3.drag()
+    .on("start", (event,d) => { if(!event.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+    .on("drag", (event,d) => { d.fx=event.x; d.fy=event.y; })
+    .on("end", (event,d) => { if(!event.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; })
+  ).on("mousedown.zoom",null);
+
+nodeEl.append("circle").attr("class","bullet").attr("r",bulletRadius);
+nodeEl.append("text").attr("x",bulletRadius+4).attr("dy","0.35em").text(d=>d.id);
+nodeEl.each(function(){const g=d3.select(this),t=g.select("text"),b=t.node().getBBox();
+  g.insert("rect","text").attr("class","label-bg").attr("x",b.x-6).attr("y",b.y-4)
+    .attr("width",b.width+12).attr("height",b.height+8).attr("rx",(b.height+8)/2);
+});
+
+nodeEl.on("mouseover",(event,d)=>{
+  const vis=new Set([d.id,...adjacency[d.id]]);
+  container.selectAll("circle.bullet").style("opacity",p=>vis.has(p.id)?1:0.1);
+  container.selectAll("text").style("opacity",p=>vis.has(p.id)?1:0.1);
+  linkEl.style("stroke-opacity",l=>vis.has(l.source.id)&&vis.has(l.target.id)?0.6:0.05);
+  nodeEl.filter(n=>vis.has(n.id)).each(function(){d3.select(this).raise();})
+    .select("circle.bullet").transition().duration(duration).attr("r",bulletRadius*scaleFactor);
+});
+
+nodeEl.on("mouseout",()=>{
+  container.selectAll("circle.bullet, text").style("opacity",1);
+  linkEl.style("stroke-opacity",0.6);
+  nodeEl.selectAll("circle.bullet").transition().duration(duration).attr("r",bulletRadius);
+});
+
+simulation.on("tick",()=>{
+  linkEl.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
+        .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+  nodeEl.attr("transform",d=>`translate(${d.x},${d.y})`);
+});
+</script>
+</body>
+</html>

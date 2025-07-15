@@ -137,6 +137,7 @@ p {
     gap: 16px;
     margin: 16px 0;
     justify-content: flex-start;
+    padding-top: 16px;
 }
 
 .stats-icon {

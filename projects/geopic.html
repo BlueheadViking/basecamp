@@ -3,149 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Page</title>
+    <title>GeoPic: How Curiosity Turned Into a Real, Interactive Map Tool</title>
     <link rel="stylesheet" href="../styles.css">
-
-
 </head>
 <body>
-    
     <div class="container">
         <header class="header">
             <a href="/index.html" class="btn-tertiary">
                 <span class="material-icons">arrow_back</span>
                 Back
             </a>
-            
-            <h1>Job Management UX</h1>
-            <p class="date"><strong>2023</strong></p>
+            <h1>GeoPic</h1>
+            <p class="date"><strong>2024</strong></p>
             <p class="description">
-                I was tasked with designing a new job management system to replace the existing product. Here is how it went. 
+                How Curiosity Turned Into a Real, Interactive Map Tool
             </p>
-        </header>     
+        </header>
 
         <div class="image-wrapper">
-            <img src="../images\jobs-mockup.avif" alt="Project Visual" class="full-width-image">
+            <img src="../images\geopic-hero.png" alt="Hero Shot" class="full-width-image">
         </div>
 
         <div class="section-header">
 
-
             <h3>Overview</h3>
-            <p>Tabula Live is to be the eventual full replacement of the existing Proof of Placement and Job management system. The existing system has its warts, but is a well-established player in the world of job management. Since its inception, it has had over 90 million hectares worth of work put through it - enough to cover a rugby pitch 33 million times. This product has sculpted and led the agricultural job management industry and is the foundation on which Tabula's success has been built. It would be hard to replace such a product, but there was a gap for the next generation of Agricultural Job management.</p>
-            
+            <p>
+                GeoPic started as an idea that came up while playing with maps for work. As a UX designer, I needed to compare Mapbox styles at the same zoom level and location. Manually mocking this up felt tedious, so I decided to explore building it myself. AI is pretty good nowdays (2024) - how hard could it possibly be?
+            </p>
+            <p>
+                Using ChatGPT and Mapbox, I started with getting a map to show up in a local .html file, I had done this for work and so didnt take too long. I played around with the Mapbox Styles a fair bit (I thought it was pretty cool) before soon realising that this project was quickly exceeding the pace that notepad could keep up with. Time to delve into Visual Studio Code - something I was not very familiar with (My jam is Figma)
+            </p>
+            <p>
+                The first real step that made something real was using AI to create me a random selection of points around the globe. I tinkered with this a little, adding lines between all the markers, lines between the closest five markers, and then markers within a proximity, colouring by distance. This was pretty cool, I had always percieved mapping as a tough problem, but I had created a prototype in less than an hour. Fasinating.
+            </p>
+            <p>
+                After a little fun mucking about, I decided to continue by generating some markers across New Zealand. It worked well enough for a proof of concept, though the markers weren’t confined to country borders and weren’t very accurate. It was good enough to help me realise some of my ideas
+            </p>
+            <p>
+                The timing couldn’t have been better—AI tools were rapidly evolving. partway through the project, GPT introduced beta versions of canvas and reasoning capabilities, and suddenly, prototyping became much more efficient. I could view all my code on one canvas and make changes to it without needing to copy paste my whole codebase. (apologies to all of the actual developers I just offended)
+            </p>
+            <p>
+                Initially, my goal was simple: build something real that people might use. But as the project progressed, the vision shifted. I started imagining GeoPic as a platform for location-based photography competitions or a way to showcase community-nominated photos from around the world, this quickly migrated to a way to show my photos geographically. The more I worked on it the more inspired I got.
+            </p>
+            <p>
+                Getting the map up and running was the first milestone. But I couldn't use random locations forever, and I knew for sure I wasn't going to do a commit every time I needed to update the data. I used Google Sheets for data storage - this also allowed me to update data, and copy paste real world locations. Is this the start of a back-end?
+            </p>
+            <p>
+                A coworker introduced me to the live preview feature on VS Code, which became a game-changer—before that, I was clumsily building and uploading code just to test it!
+            </p>
+            <p>
+                The moment I saw my first functional, interactive map felt incredible. It was no longer just a mockup; it was real. I could pan around and see real-world locations. Mapping has always excited me, so this was a big deal.
+            </p>
+            <p>
+                Interestingly, I later discovered that Mapbox has a built-in style preview feature that could have simplified my initial work experiment. In hindsight, though, I’m glad I didn’t know—it pushed me to learn more by doing.
+            </p>
 
-            
-            <h3>Goals and Objectives</h3>
-            <p>The goal? Design and build the next generation job management system, capable of being built onto and heavily used for the next 10 years. To help with this, some key objectives were set.</p>
-        
-            
-            <ul>
-            <li>Must be scalable</li>
-            <li>Must be specific</li>
-            <li>Must collect as much information as possible</li>
-            <li>Must work on mobile, tablet, and desktop</li>
-            </ul>
-            
-            <h3>Problem Statement</h3>
-            <p>The project was prioritized because the existing system was beginning to become delicate. Ten years of technology change was taking its toll. While this didn’t have an effect on its daily life, it meant that changing anything introduced risk, not ideal for such an important product.</p>
-            
-            <p>Job management is just a section of the work to do in Tabula Live. Tabula Live will eventually take over all of Tabula’s current operations including reporting, device management, GPS tracking, proof of placement, and guidance systems.</p>
-            
-            <h3>My Role</h3>
-            <p>On this project, my role was UX/UI/Product Designer. I covered:</p>
-            <ul>
-            <li>Customer Interviews</li>
-            <li>Interface Design</li>
-            <li>User Experience</li>
-            <li>Documentation</li>
-            </ul>
-            
-            <h3>Key Insights</h3>
-            <ul>
-            <li>We needed to do more than spreading and spraying</li>
-            <li>Not all jobs have the same components</li>
-            <li>Customization was more important than expected</li>
-            <li>More and more operators were using mobile devices to do their job management</li>
-            <li>Every contractor said they weren’t good with technology</li>
-            <li>Customers knew the job management process better than most Tabula Staff</li>
-            </ul>
-            
-            <h3>Process</h3>
-            <p>From the research period, it was clear that there were some pain points.</p>
-            <ul>
-            <li>TMO was built for a very defined customer, spreading contractors (and it served them very well!)</li>
-            <li>A user could create a job from different places in TMO and would go through different workflows</li>
-            <li>Job creation workflow was complex for even simple jobs</li>
-            <li>Workflow and UI were not intuitive for new/long-term sporadic users</li>
-            <li>Didn’t scale well</li>
-            <li>Catered to power users who had gone on a steep learning curve</li>
-            </ul>
-            
-            <p>One particularly challenging pain point was not at the customer end - but rather internally. Before me, several designers had attempted to tackle this complex problem. Each design and implementation had taken a toll on the remaining team. Having a new designer (me!) on the project to redesign it again did not fill the team with hope. To combat this, I put together research, presentations, and got the team together to align everyone. Slide decks took a lot of time, but the hive mindset afterward was invaluable. Que the whiteboard scribbles..</p>
+            <h3>Second Steps: Making the Map Smarter</h3>
+            <h4>Adding GPS Data</h4>
+            <p>
+                I opted to store GPS data in Google Sheets, which allowed for easy updates without needing to commit new files. This also made the project more scalable—anyone could add to the sheet and see updates in real time.
+            </p>
+            <p>
+                Next, I integrated some GPS data. I looked through a few datasets, and didnt find anything until I came accross a "Cities of NZ" dataset. Good enough for now, albeit people I showed thought I was building a city finder app.. I toyed with the idea of linking it to a live database but I was out of my depth on that one, and there were more exciting things to work on. Initially, I used a bounding box to zoom to clusters of points, but it quickly became clear that this approach wasn’t great. The box was too big, the data too clustered, and it wasn’t as nice looking as I hoped. I focusing the zoom on Dunedin, NZ, my home city, proved a better compromise. Dunedin has close markers and a unique road layout with the Octagon, which made it visually interesting for testing, and quite cool to have the starting point of the software be where I was developing it. Eventually I would like to have it zoom to the users home region.
+            </p>
 
-            <div class="image-wrapper">
-                <img src="../images\whiteboard-001.avif" alt="Project Visual" class="full-width-image">
-            </div>
+            <h3>Reinventing Selection</h3>
+            <p>
+                Rather than relying on the typical click-on-marker selection method, I wanted something different, especially for mobile users. I created a system where users could pan the map, and points were selected based on proximity. I found this feature on the cursor in BattleBit Remastered which was similar and took inspiration.
+            </p>
+            <p>
+                This came with challenges. I initially had the selector line snap to the closest marker, but this was sometimes off the screen, doing a radus around the centre of the screen was good in theory but when very zoomed in, or very zoomed out it fell apart. After sleeping on it, I eventually clicked and took a percentage of the screen width. This worked well and was very intuitive over desktop and mobile.
+            </p>
 
-            <div class="image-wrapper">
-                <img src="../images\whiteboard-002.avif" alt="Project Visual" class="full-width-image">
-            </div>
+            <h3>Third Steps: Adding Interactivity</h3>
+            <p>
+                GeoPic started coming to life with the addition of interactive features. At first, proximity to a point simply displayed a bit of text at the top of the map. It was neat but felt underwhelming.
+            </p>
+            <p>
+                I then added a dialog with a thumbnail, title, and location. This worked better, especially on mobile, but placing the dialog at the bottom created design challenges. It felt unbalanced, especially with longer text, and didn’t align with typical mapping software layouts.
+            </p>
+            <p>
+                Moving the dialog to the top-right corner solved this problem. It gave me more room for images, better styling options, and a cleaner design. I also added fullscreen image previews, letting users view high-quality photos and navigate between them.
+            </p>
+            <p>
+                To add depth, I introduced the option for photographers to include a story or blurb about their photo. Users could even link their Instagram handles, creating a layer of attribution and a potential "clout" incentive to participate.
+            </p>
 
-            <div class="image-wrapper">
-                <img src="../images\whiteboard-003.avif" alt="Project Visual" class="full-width-image">
-            </div>
+            <h3>Fourth Steps: Refining and Polishing</h3>
+            <h4>Map Styling</h4>
+            <p>
+                With functionality in place, I turned to visual design. I lowered the contrast of the map to shift focus to the markers while still providing spatial context. Simplifying the map made it more engaging and less visually overwhelming.
+            </p>
+            <h4>Animations and Mobile Design</h4>
+            <p>
+                I added subtle animations—a sliding dialog with a soft bounce—to make interactions feel smoother and more polished. On mobile, I implemented a sliding drawer for the dialog, which kept it from taking over the entire screen.
+            </p>
+            <p>
+                One idea I didn’t get to implement was a visual cue for scrolling, like showing half an image in the drawer. It would have been a nice touch, but I’ll save it for a future iteration.
+            </p>
 
-            
-            
-            <h3>User Experience</h3>
-            <p>In terms of UX, I had a few clear ideas of how I wanted it improved.</p>
-            <ul>
-            <li>Ability to create a job from where it makes the most sense</li>
-            <li>Ability to scale and be ready for different industries with different needs</li>
-            <li>Make the simple easy, and the complex possible</li>
-            <li>Collect high-quality data to make informed decisions later</li>
-            </ul>
-            
-            <p>Fair to say, I succeeded. Jobs could be created from the main area the user lives - the main map, as well as within the Jobs tab. Each job started by selecting an activity, be it spreading or spraying to start, but could eventually be configured to do pest control, surveying, fuel transport, the list goes on.</p>
-            
-            <div class="image-wrapper">
-                <img src="../images\jobs-002.avif" alt="Project Visual" class="full-width-image">
-            </div>
+            <h3>What I Learned</h3>
+            <h4>Unexpected Joy in Building</h4>
+            <p>
+                What surprised me most was how invested I became in the project. I couldn’t stop thinking about it, jotting down new ideas day and night. The process of creating something functional, not just designing it, was incredibly rewarding.
+            </p>
+            <h4>The Power of AI and Tools</h4>
+            <p>
+                This project wouldn’t have been possible for me a few years ago. Tools like ChatGPT and advancements in AI have made it easier for people like me, who understand the concepts but lack coding expertise, to bring ideas to life.
+            </p>
+            <h4>The Role of UX Knowledge</h4>
+            <p>
+                My UX experience proved invaluable. It helped me communicate ideas effectively, whether through mockups or CSS tweaks to refine the layout. The ability to articulate problems and solutions sped up the development process.
+            </p>
+            <p>
+                GeoPic has been a journey of curiosity, creativity, and growth. It’s far from perfect, but it’s real—and that’s what makes it exciting. Whether it’s used for photography competitions or something else entirely, GeoPic is proof of what’s possible when you dive into a project with an open mind and the right tools.
+            </p>
 
+            <h3>Visit GeoPic</h3>
+            <p>
+                If you would like to visit my experiment, its currently located at <a href="https://grim.nz/experiments/geopic.html" target="_blank">grim.nz</a>. It might not be there forever, I shall do my earnest to try update the link should it change.
+            </p>
 
-            <h3>Key Challenge: Variable Rate Jobs</h3>
-            <p>A key challenge I faced was that we currently had a complex way of handling variable rate jobs (jobs where fertilizer gets applied at different rates across an area) - Analytics showed that it was not used much at all, and the general consensus was that it was an underused feature and shouldn’t be prioritized.</p>
-            
-            <p>Halfway through, the government released a new scheme where farmers had to report on all synthetic fertilizer applied on farms. This paired with COVID-19 driving fertilizer prices 5-10x higher than before. The insight? Farmers want their fertilizer to go further. As a team, we decided that we should place importance on allowing farmers to decide what quantity of fertilizer they want where.</p>
-            
-            <h3>Multi-Rate Job Creation</h3>
-            <p>This led to a fairly extensive short project on adding multi-rate to the job creation process. We needed to cater to two key user stories:</p>
-            <ul>
-            <li><strong>As a farmer</strong>, I want to define the amount of fertilizer I have upfront, then divide it between a set of paddocks because I have already bought the fertilizer, and I want to use it as efficiently as possible.</li>
-            <li><strong>As a farmer</strong>, I want to set the rate that the fertilizer needs to go on a set of paddocks so that I have enough grass to feed my animals.</li>
-            </ul>
-            
-            <p>This meant that I needed to have a system that could either calculate the total or set it for a selected group of paddocks. An early mockup allowed the user to create block-groups to assign a rate/total to. This made sense, but was the wrong choice. It went against the ethos of making the simple easy and the complex possible. This workflow forced every farmer that created a spreading job to add a block group (even if there was only one!).</p>
-            
-            <p>A second implemented iteration had more time spent on the UX, in terms of workflow and button clicks. I am proud of how it turned out. Key differences it had over the existing system were:</p>
-            <ul>
-            <li>Users could flick between “by total” and “by rate” easily without losing data</li>
-            <li>Users could carry on with the simple workflow of all the blocks having the same rate/total, and choose to go deeper by selecting “Multi-Rate Job”</li>
-            <li>Visual display of rate was indicated by adding more black or white to the requested block (Lighter = Less, Darker = More)</li>
-            <li>Users could start an order like normal, add blocks with a rate to the job, and then move into multi-rate. The existing set of blocks and rates would be wrapped up into the first block group</li>
-            <li>When there were two or more groups, selecting the dropdown would grey out any other block group on the map, so it was clear which the user was editing</li>
-            </ul>
-            
-
-
-
-        
+            <p>Cheers, Griff</p>
         </div>
-
-
     </div>
-    
     <footer class="footer">
         <div class="footer-svg"></div>
         <div class="footer-content">Copyright© Griffin 2025</div>

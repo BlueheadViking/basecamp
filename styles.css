@@ -5,6 +5,8 @@
 :root {
     --background-color: #F8FEF2;
     --primary-color: #0D5239;
+    --paragraph-color: #406256;
+    --link-color: #E67A68;
     --secondary-background: rgba(13, 82, 57, 0.0625);
     --border-color: rgba(13, 82, 57, 0.3125);
     --placeholder-background: #EAEAEA;
@@ -145,7 +147,7 @@ p {
     font-weight: normal;
     line-height: 24px;
     margin: 4px 0 0;
-    color: var(--primary-color);
+    color: var(--paragraph-color);
 }
 
 ul {
@@ -386,7 +388,7 @@ ul {
 
 .project-row-content {
     display: flex;
-    flex-direction: column; /* Ensures title is above description */
+    flex-direction: column; 
 }
 
 

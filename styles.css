@@ -13,6 +13,14 @@
 }
 
 @font-face {
+  font-family: 'Figtree';
+  src: url('/fonts/Figtree-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
     font-family: 'ABCMonumentGrotesk';
     src: url('./fonts/ABCMonumentGroteskSemi-Mono-Regular-Trial.woff2') format('woff2');
     font-weight: normal;
@@ -32,6 +40,7 @@
     font-weight: 900;
     font-style: normal;
 }
+
 
 body {
     background: #F8FEF2 url('images/topo-map.svg') repeat;
@@ -132,6 +141,7 @@ h4 {
 
 p {
     font-size: 16px;
+    font-family: "Figtree", sans-serif;
     font-weight: normal;
     line-height: 24px;
     margin: 4px 0 0;
@@ -226,7 +236,7 @@ ul {
     padding: 16px;
     max-width: 800px;
     margin: auto;
-    margin-top: 128px;
+    margin-top: 32px;
     
 }
 

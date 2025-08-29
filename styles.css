@@ -89,10 +89,10 @@ body {
 
 .stats-section {
   display: flex;
-  flex-wrap: wrap;           /* allow cards to wrap onto new lines */
+  flex-wrap: wrap;           
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 0 1rem;           /* horizontal gutter */
+  padding: 0 1rem;          
   box-sizing: border-box;
   text-align: center;
 }
@@ -154,6 +154,7 @@ ul {
     line-height: 24px;
     margin: 4px 0 0;
     color: var(--primary-color);
+    font-family: "Figtree", sans-serif;
 }
 
 .buttons {

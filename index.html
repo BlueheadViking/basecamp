@@ -14,8 +14,7 @@
         <div class="main-header">
             <p>Welcome to my <strong>Basecamp</strong> — the home of my design work.</p>
             <h1>I’m Griffin.</h1>
-            <p>I’m an AI enabled <strong>Product Designer</strong> who turns complexity into clarity. For the past five
-                years, I’ve designed intuitive map centric solutions that make life easier for tech-adjacent users. I
+            <p>I’m an AI enabled <strong>Product Designer</strong> who turns complexity into clarity. For the last half decade, I’ve designed intuitive map centric solutions that make life easier for tech-adjacent users. I
                 have the most
                 impact when I am translating user needs into development lingo. Outside of work, you’ll find me
                 exploring, taking photos, vibe coding, or whatever creative idea has caught my curiosity.</p>
@@ -24,7 +23,7 @@
 
             <div class="buttons">
                 <button class="btn-primary" id="myWorkBtn">My Work</button>
-                <button class="btn-secondary" id="writingBtn">Writing</button>
+                <button class="btn-secondary" id="contactBtn">Contact</button>
             </div>
         </div>
 
@@ -43,17 +42,17 @@
         <div class="stats-wrapper">
             <div class="stats-section">
                 <div class="stat-card">
-                    <span class="material-icons stats-icon">map</span>
+                    <span class="material-icons-round stats-icon">map</span>
                     <h3 class="stat-number">3,500,000</h3>
                     <p class="stat-caption">Hectares covered monthly across the globe, enough to cover Great Britain - every six months.</p>
                 </div>
                 <div class="stat-card">
-                    <span class="material-icons stats-icon">timelapse</span>
+                    <span class="material-icons-round stats-icon">timelapse</span>
                     <h3 class="stat-number">85,000</h3>
                     <p class="stat-caption">Monthly hours of Pilots and Ground operators doing work on land globally</p>
                 </div>
                 <div class="stat-card">
-                    <span class="material-icons stats-icon">straighten</span>
+                    <span class="material-icons-round stats-icon">straighten</span>
                     <h3 class="stat-number">2,100,000</h3>
                     <p class="stat-caption">Kilometres travelled with a working switch on every month. Enough to lap the
                         world in half a day.</p>
@@ -128,8 +127,6 @@
             </div>
 
 
-
-
         </div>
         <div class="section-header" id="experiments">
             <h2>Interactive Experiments</h2>
@@ -145,6 +142,7 @@
                     <h4>Geopic</h4>
                     <p>Mapping, Geospatial, and a rough introduction to AI.</p>
                 </div>
+                <span class="material-icons-round chevron-icon">chevron_right</span>
             </div>
 
             <div class="project-row experiment-row" data-project="knowledge-map">
@@ -153,6 +151,7 @@
                     <h4>Knowledge Map</h4>
                     <p>I have a lot of specific domain knowledge, and this is my way to illustrate that.</p>
                 </div>
+                <span class="material-icons-round chevron-icon">chevron_right</span>
             </div>
 
             <div class="project-row experiment-row" data-project="fish-game">
@@ -161,6 +160,7 @@
                     <h4>Fish Game</h4>
                     <p>Boids and beating my head against a wall.</p>
                 </div>
+                <span class="material-icons-round chevron-icon">chevron_right</span>
             </div>
 
             <div class="project-row experiment-row" data-project="dot-game">
@@ -169,6 +169,7 @@
                     <h4>Exploding Skittles</h4>
                     <p>A quick mindless game I made while I was procrastinating.</p>
                 </div>
+                <span class="material-icons-round chevron-icon">chevron_right</span>
             </div>
 
         </div>
@@ -189,6 +190,7 @@
                     <h4>My Design Process</h4>
                     <p>How I ensure my designwork is industry leading.</p>
                 </div>
+                <span class="material-icons-round chevron-icon">chevron_right</span>
             </div>
 
             <div class="project-row" data-project="presentation">
@@ -197,8 +199,17 @@
                     <h4>High Stakes Presenting Tips</h4>
                     <p>Strategies for Preparing a High-Stakes Presentation.</p>
                 </div>
+                <span class="material-icons-round chevron-icon">chevron_right</span>
             </div>
+            
 
+        </div>
+
+        <div class="section-header" id="contact">
+            <h2>Contact Me</h2>
+            <p>I am currently open for work.</p>
+
+            <p>Whether you are just browsing or interested in what I do - I would love to spin a yarn. Contact me at <strong>griffhadland@gmail.com.</strong></p>
         </div>
     </div>
 
@@ -229,8 +240,8 @@
             }
 
             // Smooth scrolling to "Writing"
-            const writingButton = document.querySelector("#writingBtn");
-            const writingSection = document.querySelector("#writing");
+            const writingButton = document.querySelector("#contactBtn");
+            const writingSection = document.querySelector("#contact");
 
             if (writingButton && writingSection) {
                 writingButton.addEventListener("click", function () {

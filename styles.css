@@ -1,6 +1,5 @@
 /* Define color variables */
 
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 :root {
     --background-color: #F8FEF2;
@@ -168,7 +167,7 @@ ul {
 }
 
 .stats-icon {
-  font-size: 3.5rem;   /* or 4rem, 3rem—whatever looks right */
+  font-size: 10rem;   /* or 4rem, 3rem—whatever looks right */
   color: var(--primary-color);
   display: inline-block;
 }
@@ -356,7 +355,8 @@ ul {
 
 .project-row {
     display: flex;
-    align-items: flex-start;
+    align-items: center; /* center so text and chevron align */
+    justify-content: space-between; /* push chevron to right */
     background: var(--secondary-background);
     border: 2px solid var(--border-color);
     border-radius: 12px;
@@ -365,6 +365,10 @@ ul {
     cursor: pointer;
     backdrop-filter: blur(2px);
 }
+
+.material-icons-round.stats-icon {
+     font-size: 3rem; }
+
 
 .project-row:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -401,4 +405,21 @@ ul {
     width: 100%;
     max-width: 350px;
   }
+}
+
+
+
+
+
+
+.chevron-icon {
+  font-size: 24px;
+  color: var(--primary-color);
+  margin-left: 8px;
+  flex-shrink: 0; /* prevents squishing */
+  transition: transform 0.2s ease;
+}
+
+.project-row:hover .chevron-icon {
+  transform: translateX(4px); /* subtle hover nudge */
 }

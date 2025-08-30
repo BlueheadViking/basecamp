@@ -1,16 +1,17 @@
-/* Define color variables */
-
+/* ======================
+   Design tokens & fonts
+   ====================== */
 
 :root {
-    --background-color: #F8FEF2;
-    --primary-color: #0D5239;
-    --paragraph-color: #406256;
-    --link-color: #E67A68;
-    --secondary-background: rgba(13, 82, 57, 0.0625);
-    --border-color: rgba(13, 82, 57, 0.3125);
-    --placeholder-background: #EAEAEA;
-    --placeholder-text: #D9534F;
-    --footer-background: #0D5239;
+  --background-color: #F8FEF2;
+  --primary-color: #0D5239;
+  --paragraph-color: #406256;
+  --link-color: #E67A68;
+  --secondary-background: rgba(13, 82, 57, 0.0625);
+  --border-color: rgba(13, 82, 57, 0.3125);
+  --placeholder-background: #EAEAEA;
+  --placeholder-text: #D9534F;
+  --footer-background: #0D5239;
 }
 
 @font-face {
@@ -20,65 +21,211 @@
   font-style: normal;
 }
 
-
 @font-face {
-    font-family: 'ABCMonumentGrotesk';
-    src: url('./fonts/ABCMonumentGroteskSemi-Mono-Regular-Trial.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'ABCMonumentGrotesk';
+  src: url('./fonts/ABCMonumentGroteskSemi-Mono-Regular-Trial.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ABCMonumentGrotesk';
+  src: url('./fonts/ABCMonumentGroteskSemi-Mono-Bold-Trial.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ABCMonumentGrotesk';
+  src: url('./fonts/ABCMonumentGroteskSemi-Mono-Black-Trial.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
 }
 
-@font-face {
-    font-family: 'ABCMonumentGrotesk';
-    src: url('./fonts/ABCMonumentGroteskSemi-Mono-Bold-Trial.woff2') format('woff2');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'ABCMonumentGrotesk';
-    src: url('./fonts/ABCMonumentGroteskSemi-Mono-Black-Trial.woff2') format('woff2');
-    font-weight: 900;
-    font-style: normal;
-}
-
+/* ======================
+   Base
+   ====================== */
 
 body {
-    background: #F8FEF2 url('images/topo-map.svg') repeat;
-    font-family: 'ABCMonumentGrotesk', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: var(--primary-color);
-    background-size: cover; /* Adjust as needed */
-    background-position: top center; /* Adjust as needed */
-    background-attachment: fixed; /* Keeps it fixed while scrolling */
+  background: #F8FEF2 url('images/topo-map.svg') repeat;
+  font-family: 'ABCMonumentGrotesk', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--primary-color);
+  background-size: cover;
+  background-position: top center;
+  background-attachment: fixed;
 }
 
 .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 48px 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 48px 0;
 }
 
-
 .header {
-    text-align: left;
-    max-width: 800px;
-    margin: auto;
-    padding: 16px;
-    height: none;
-    align-content: center;
+  text-align: left;
+  max-width: 800px;
+  margin: auto;
+  padding: 16px;
+  height: none;
+  align-content: center;
 }
 
 .main-header {
-    text-align: left;
-    max-width: 800px;
-    margin: auto;
-    padding: 16px;
-    height: 50vh;
-    align-content: center;
+  text-align: left;
+  max-width: 800px;
+  margin: auto;
+  padding: 16px;
+  height: 50vh;
+  align-content: center;
 }
+
+h1 {
+  font-size: 48px;
+  font-weight: 600;
+  margin: 16px 0;
+}
+
+.header p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 24px;
+  margin: 16px 0;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 8px 0 4px;
+  color: var(--primary-color);
+}
+
+p {
+  font-size: 16px;
+  font-family: 'Figtree', sans-serif;
+  font-weight: normal;
+  line-height: 24px;
+  margin: 4px 0 0;
+  color: var(--paragraph-color);
+}
+
+ul {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 24px;
+  margin: 4px 0 0;
+  color: var(--primary-color);
+  font-family: 'Figtree', sans-serif;
+}
+
+/* ======================
+   Buttons
+   ====================== */
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+  justify-content: flex-start;
+  padding-top: 16px;
+}
+
+.btn-primary {
+  font-family: 'ABCMonumentGrotesk', sans-serif;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+
+.btn-secondary {
+  font-family: 'ABCMonumentGrotesk', sans-serif;
+  background: var(--secondary-background);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+
+.btn-tertiary {
+  font-family: 'ABCMonumentGrotesk', sans-serif;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  padding-block: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  align-content: center;
+  text-decoration: none;
+  max-width: fit-content;
+}
+
+/* ======================
+   Sections & imagery
+   ====================== */
+
+.image-wrapper {
+  padding: 4px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.full-width-image {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.section-header {
+  padding: 16px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 32px;
+}
+.section-header p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+
+/* ======================
+   Stats
+   ====================== */
 
 .stats-wrapper {
   max-width: 800px;
@@ -87,13 +234,12 @@ body {
   box-sizing: border-box;
 }
 
-
 .stats-section {
   display: flex;
-  flex-wrap: wrap;           
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 0 1rem;          
+  padding: 0 1rem;
   box-sizing: border-box;
   text-align: center;
 }
@@ -103,298 +249,174 @@ body {
   margin-bottom: 1.5rem;
 }
 
-
-h1 {
-    font-size: 48px;
-    font-weight: 600;
-    margin: 16px 0;
-}
-
-.header p {
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 24px;
-    margin: 16px 0;
-}
-
-h2 {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 40px;
-    margin-bottom: 16px;
-}
-
-h3 {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 40px;
-    margin-bottom: 16px;
-    margin-top: 32px;
-}
-
-h4 {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
-    margin: 8px 0 4px;
-    color: var(--primary-color);
-}
-
-p {
-    font-size: 16px;
-    font-family: "Figtree", sans-serif;
-    font-weight: normal;
-    line-height: 24px;
-    margin: 4px 0 0;
-    color: var(--paragraph-color);
-}
-
-ul {
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 24px;
-    margin: 4px 0 0;
-    color: var(--primary-color);
-    font-family: "Figtree", sans-serif;
-}
-
-.buttons {
-    display: flex;
-    gap: 16px;
-    margin: 16px 0;
-    justify-content: flex-start;
-    padding-top: 16px;
-}
-
-.stats-icon {
-  font-size: 10rem;   /* or 4rem, 3rem—whatever looks right */
+.material-icons-round.stats-icon {
+  font-size: clamp(3rem, 6vw, 5rem); /* responsive large icons */
+  line-height: 1;
   color: var(--primary-color);
   display: inline-block;
+  margin-bottom: 8px;
 }
 
-
-.btn-primary {
-    font-family: 'ABCMonumentGrotesk', sans-serif;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 9999px;
-}
-
-.btn-secondary {
-    font-family: 'ABCMonumentGrotesk', sans-serif;
-    background: var(--secondary-background);
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 9999px;
-}
-
-.btn-tertiary {
-    font-family: 'ABCMonumentGrotesk', sans-serif;
-    background: none;
-    color: var(--primary-color);
-    border: none;
-    padding-block: 16px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    align-content: center;
-    text-decoration: none;
-    max-width: fit-content;
-    
-}
-
-.image-wrapper {
-    padding: 4px;
-    max-width: 800px;
-    margin: auto;
-}
-
-.full-width-image {
-    width: 100%;
-    max-width: 800px;
-    display: block;
-    margin: 20px auto;
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 0;
-    box-sizing: border-box;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.section-header {
-    padding: 16px;
-    max-width: 800px;
-    margin: auto;
-    margin-top: 32px;
-    
-}
-
-.section-header p {
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 24px;
-    margin-bottom: 16px;
-}
+/* ======================
+   Project cards (grid)
+   ====================== */
 
 .projects {
-    text-align: center;
-    margin-top: 48px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    max-width: 800px;
-    margin: auto;
-    padding: 16px;
-    perspective: 1000px;
+  text-align: center;
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  max-width: 800px;
+  margin: auto;
+  padding: 16px;
+  perspective: 1000px;
 }
 
 .project-card {
-    background: var(--secondary-background);
-    backdrop-filter: blur(2px);
-    padding: 16px;
-    border-radius: 12px;
-    text-align: left;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid var(--border-color);
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
-    transform-style: preserve-3d;
-    cursor: pointer;
+  background: var(--secondary-background);
+  backdrop-filter: blur(2px);
+  padding: 16px;
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: 2px solid var(--border-color);
+  transition: transform 0.1s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
 }
-
 .project-card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .project-card .image-container {
-    width: 100%;
-    height: 200px;
-    background: var(--placeholder-background);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    overflow: hidden; /* Ensures the image does not exceed the container */
+  width: 100%;
+  height: 200px;
+  background: var(--placeholder-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
 }
-
 .project-card .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image fills the space without distortion */
-    border-radius: 8px; /* Matches the container's rounded corners */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
-
 
 .tags {
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
 }
-
 .tags span {
-    display: inline-block;
-    background: var(--secondary-background);
-    border: 1px solid var(--primary-color);
-    padding: 4px 8px;
-    font-size: 10px;
-    line-height: 10px;
-    border-radius: 8px;
-    font-weight: 600;
+  display: inline-block;
+  background: var(--secondary-background);
+  border: 1px solid var(--primary-color);
+  padding: 4px 8px;
+  font-size: 10px;
+  line-height: 10px;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
-.footer {
-    display: flex;
-    flex-direction: column; /* Auto Layout style - stacks elements vertically */
-    align-items: center;
-    justify-content: flex-end; /* Keeps text at the bottom */
-    width: 100%;
-    height: inherit; 
-    margin: auto;
-    overflow: hidden; /* Prevents scrollbars */
-}
-
-/* The SVG rectangle shape */
-.footer-svg {
-    width: 100%;
-    height: 200px; /* Adjust height as needed */
-    background: url('images/topo-map-footer.svg') repeat;
-}
-
-/* Footer text styling */
-.footer-content {
-    background: #0E523A; /* Footer green color */
-    width: 100%;
-    text-align: center;
-    color: #ffffff80;
-    padding: 16px;
-    font-size: 18px;
-}
+/* ======================
+   Project rows (lists)
+   ====================== */
 
 .project-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 800px;
-    margin: auto;
-    padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 800px;
+  margin: auto;
+  padding: 16px;
 }
-
 
 .project-row {
-    display: flex;
-    align-items: center; /* center so text and chevron align */
-    justify-content: space-between; /* push chevron to right */
-    background: var(--secondary-background);
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 16px;
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;           /* text + chevron aligned */
+  justify-content: space-between;/* push chevron right */
+  background: var(--secondary-background);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.1s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
 }
-
-.material-icons-round.stats-icon {
-     font-size: 3rem; }
-
-
 .project-row:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transform: scale(1.02);
-}
-
-.project-row-image {
-    width: 80px;
-    height: 80px;
-    background: var(--placeholder-background);
-    color: var(--placeholder-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-right: 16px;
-    flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transform: scale(1.02);
 }
 
 .project-row-content {
-    display: flex;
-    flex-direction: column; 
+  display: flex;
+  flex-direction: column;
+  flex: 1;                       /* prevents chevron wrap */
 }
 
+.project-row-image {
+  width: 80px;
+  height: 80px;
+  background: var(--placeholder-background);
+  color: var(--placeholder-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.chevron-icon {
+  font-size: 24px;
+  color: var(--primary-color);
+  margin-left: 8px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  pointer-events: none;          /* row gets the click */
+}
+.project-row:hover .chevron-icon {
+  transform: translateX(4px);
+}
+
+/* ======================
+   Footer
+   ====================== */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: inherit;
+  margin: auto;
+  overflow: hidden;
+}
+.footer-svg {
+  width: 100%;
+  height: 200px;
+  background: url('images/topo-map-footer.svg') repeat;
+}
+.footer-content {
+  background: #0E523A;
+  width: 100%;
+  text-align: center;
+  color: #ffffff80;
+  padding: 16px;
+  font-size: 18px;
+}
+
+/* ======================
+   Responsive
+   ====================== */
 
 @media (max-width: 600px) {
   .stats-section {
@@ -405,21 +427,4 @@ ul {
     width: 100%;
     max-width: 350px;
   }
-}
-
-
-
-
-
-
-.chevron-icon {
-  font-size: 24px;
-  color: var(--primary-color);
-  margin-left: 8px;
-  flex-shrink: 0; /* prevents squishing */
-  transition: transform 0.2s ease;
-}
-
-.project-row:hover .chevron-icon {
-  transform: translateX(4px); /* subtle hover nudge */
 }

@@ -30,12 +30,15 @@
       top: 2rem;
       left: -350px;
       width: 300px;
+      min-height: 280px;
       background: rgba(255, 255, 255, 0.9);
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       border-radius: 12px;
       padding: 0.5rem;
       transition: all 0.3s cubic-bezier(0.25, 1.15, 0.5, 1);
       z-index: 1500;
+      display: flex;
+      flex-direction: column;
     }
     .info-panel.show { left: 2rem; }
     .info-drawer {
@@ -43,6 +46,8 @@
       position: fixed;
       bottom: -350px;
       transform: translateY(80%);
+      width: calc(100% - 1rem);
+      min-height: 240px;
       max-width: 500px;
       background: rgba(255, 255, 255, 0.95);
       box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
@@ -51,21 +56,24 @@
       transition: all 0.3s cubic-bezier(0.25, 1.15, 0.5, 1);
       z-index: 1500;
       margin: 0 0.5rem;
+      display: flex;
+      flex-direction: column;
     }
     .info-drawer.show { bottom: 0; }
     .info-panel img, .info-drawer img {
       width: 100%;
-      height: auto;
-      max-height: 150px;
+      height: 150px;
       object-fit: cover;
       border-radius: 6px;
       background-color: #ccc;
+      flex-shrink: 0;
     }
     .info-panel-header, .info-drawer-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin: 10px 0 5px;
+      flex-shrink: 0;
     }
     .info-panel-title, .info-drawer-title {
       font-size: 1.2rem;
@@ -78,12 +86,16 @@
       font-size: 0.875rem;
       color: #555;
       line-height: 1.5;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
+      flex: 1;
+      overflow-y: auto;
     }
     .info-panel-photographer, .info-drawer-photographer {
       font-size: 1rem;
       font-weight: 700;
       color: rgba(0, 0, 0, 0.5);
+      flex-shrink: 0;
+      margin-top: auto;
     }
     #loading-screen {
       position: absolute;
@@ -134,8 +146,8 @@
       transition: width 2s ease;
     }
     @media (max-width: 768px) {
-      .info-panel { display: none; }
-      .info-drawer { display: block; }
+      .info-panel { display: none !important; }
+      .info-drawer { display: flex !important; }
     }
   </style>
 
@@ -261,8 +273,27 @@
             type: 'line',
             source: 'crosshair-line',
             layout: { 'line-join': 'round', 'line-cap': 'round' },
-            paint: { 'line-color': '#FFFF00', 'line-width': 5 }
+            paint: { 
+              'line-color': '#FFFF00', 
+              'line-width': 5,
+              'line-opacity': 0.8
+            }
           });
+        }
+
+        if (!map.getLayer('crosshair-line-glow')) {
+          map.addLayer({
+            id: 'crosshair-line-glow',
+            type: 'line',
+            source: 'crosshair-line',
+            layout: { 'line-join': 'round', 'line-cap': 'round' },
+            paint: { 
+              'line-color': '#FFFF00', 
+              'line-width': 12,
+              'line-opacity': 0.3,
+              'line-blur': 3
+            }
+          }, 'crosshair-line-layer');
         }
 
         if (!map.getSource('photos')) {
@@ -294,6 +325,27 @@
             handleMarkerClick(e.features[0]);
           }
         });
+
+        // Animate the crosshair line with a pulsing effect
+        let pulseDirection = 1;
+        let pulseOpacity = 0.8;
+        function animateCrosshairLine() {
+          pulseOpacity += pulseDirection * 0.02;
+          if (pulseOpacity >= 1) {
+            pulseOpacity = 1;
+            pulseDirection = -1;
+          } else if (pulseOpacity <= 0.4) {
+            pulseOpacity = 0.4;
+            pulseDirection = 1;
+          }
+          
+          if (map.getLayer('crosshair-line-layer')) {
+            map.setPaintProperty('crosshair-line-layer', 'line-opacity', pulseOpacity);
+          }
+          
+          requestAnimationFrame(animateCrosshairLine);
+        }
+        animateCrosshairLine();
       }
 
       function handleMarkerClick(clickedFeature) {

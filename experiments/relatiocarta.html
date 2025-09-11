@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RelatioCarta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .info-card {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      max-width: 340px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 14px;
+      line-height: 1.6;
+      display: none;
+      z-index: 10;
+      transform: translateY(-8px);
+      transition: all 0.3s cubic-bezier(0.25, 1.15, 0.5, 1);
+    }
+    
+    .info-card.show {
+      transform: translateY(0);
+    }
+
+    .info-card h3 {
+      margin: 0 0 12px 0;
+      font-family: 'Ubuntu Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0D5239;
+      line-height: 1.4;
+    }
+
+    .info-card p {
+      margin: 0 0 16px 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: #4a5568;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .info-card .links-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(13, 82, 57, 0.1);
+    }
+    
+    .info-card .links-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #718096;
+      margin-bottom: 8px;
+    }
+
+    .info-card a {
+      display: inline-block;
+      margin: 0 8px 8px 0;
+      padding: 6px 12px;
+      font-family: 'Inter', sans-serif;
+      background: rgba(13, 82, 57, 0.08);
+      color: #0D5239;
+      font-weight: 500;
+      font-size: 13px;
+      text-decoration: none;
+      border-radius: 20px;
+      border: 1px solid rgba(13, 82, 57, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .info-card a:hover {
+      background: rgba(13, 82, 57, 0.15);
+      border-color: rgba(13, 82, 57, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .marker svg {
+      transition: transform 0.2s ease;
+    }
+
+    .marker.selected svg {
+      transform: scale(1.8);
+      z-index: 2;
+    }
+
+    .label {
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="info-card" id="infoCard"></div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYmx1ZWhlYWR2aWtpbmciLCJhIjoiY20xanRsa2YxMTJiOTJpb2d1ZHNycnpuMiJ9.j9-mp7VZxZ9Beqvx9LVP_g';
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTm8jCHJnIqOLadqR_eBZwQs5x1vDW3H-4bsB5Az4DfuxAa5d_y53UOLQxdE2BTk3o-38x9yDDq5-rj/pub?output=csv';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/blueheadviking/cmdbhlmxd02ua01ri2oqsdp2y',
+      center: [170.502, -45.878],
+      zoom: 5
+    });
+
+    const infoCard = document.getElementById("infoCard");
+
+    function showInfo(entry) {
+      const links = entry.links ? entry.links.split(',').map(link => {
+        const trimmed = link.trim();
+        // Skip empty links
+        if (!trimmed) return '';
+        
+        // Ensure the link has a protocol
+        const fullUrl = trimmed.startsWith('http') ? trimmed : `https://${trimmed}`;
+        
+        // Create a cleaner label
+        const label = trimmed.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
+        
+        // Debug logging - remove this later
+        console.log('Link processing:', { original: trimmed, fullUrl, label });
+        
+        return `<a href="${fullUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      }).filter(link => link).join("") : '';
+
+      infoCard.innerHTML = `
+        <h3>${entry.title}</h3>
+        <p>${entry.summary}</p>
+        ${links ? `<div class="links-section">
+          <div class="links-label">Related Links</div>
+          ${links}
+        </div>` : ''}
+      `;
+      infoCard.style.display = 'block';
+      setTimeout(() => infoCard.classList.add('show'), 10);
+    }
+
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(csv => {
+        const rows = csv.trim().split('\n').slice(1);
+        const entries = rows.map(row => {
+          const [title, summary, lat, lng, links, category, date, referenced_areas] = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+          return { 
+            title: title?.replace(/^"|"$/g, ''), 
+            summary: summary?.replace(/^"|"$/g, ''), 
+            lat: +lat, 
+            lng: +lng, 
+            links: links?.replace(/^"|"$/g, ''), 
+            category: category?.replace(/^"|"$/g, ''), 
+            date: date?.replace(/^"|"$/g, ''), 
+            referenced_areas: referenced_areas?.replace(/^"|"$/g, '')
+          };
+        });
+
+        entries.forEach(entry => {
+          const el = document.createElement('div');
+          el.className = 'marker';
+          el.innerHTML = `
+            <svg width="30" height="30" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="8" fill="#0D5239" stroke="white" stroke-width="2"/>
+            </svg>
+          `;
+
+          const marker = new mapboxgl.Marker({ element: el })
+            .setLngLat([entry.lng, entry.lat])
+            .addTo(map);
+
+          marker.getElement().addEventListener('click', (e) => {
+            e.stopPropagation(); // Don't trigger map click
+            document.querySelectorAll('.marker').forEach(m => m.classList.remove('selected'));
+            el.classList.add('selected');
+
+            map.flyTo({ center: [entry.lng, entry.lat], zoom: 8 });
+            showInfo(entry);
+          });
+        });
+      });
+
+    map.on('click', () => {
+      document.querySelectorAll('.marker').forEach(m => m.classList.remove('selected'));
+      infoCard.classList.remove('show');
+      setTimeout(() => infoCard.style.display = 'none', 300);
+    });
+  </script>
+</body>
+</html>
